@@ -1,0 +1,17 @@
+# docker run -it oeliks-web
+
+version: "3.8"
+
+services:
+  web:
+    container_name: oeliks-web
+    image: ghcr.io/dragonsteam/oeliks-front:latest
+    build: .
+    command: npm run build
+    # environment:
+    # - DJANGO_SETTINGS_MODULE=core.settings.dev
+
+    # volumes:
+    #   - dist:/app/dist
+# volumes:
+#   dist:
