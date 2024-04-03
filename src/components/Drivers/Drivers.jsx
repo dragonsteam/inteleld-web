@@ -28,7 +28,7 @@ const Drivers = () => {
           Add Driver
         </Button>
       </HStack>
-      {isLoading ? <h1>Loading...</h1> : <DriverTable data={data.results} />}
+      {isLoading ? <h1>Loading...</h1> : <DriverTable data={data?.results} />}
     </Box>
   );
 };

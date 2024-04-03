@@ -21,8 +21,9 @@ import {
   InputRightElement,
 } from "@chakra-ui/react";
 import { FaUserAlt, FaLock } from "react-icons/fa";
-import useRequest from "../../hooks/useRequest";
+
 import { JWTDecoder } from "../../util";
+import useRequest from "../../hooks/useRequest";
 import Msg from "../common/Msg";
 import SpinnerButton from "../common/SpinnerButton";
 
@@ -32,7 +33,9 @@ const CFaLock = chakra(FaLock);
 const Login = () => {
   const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
-  const { post, isLoading, errorMsg } = useRequest({ url: "/auth/jwt/create/" });
+  const { post, isLoading, errorMsg } = useRequest({
+    url: "/auth/jwt/create/",
+  });
   const {
     register,
     handleSubmit,

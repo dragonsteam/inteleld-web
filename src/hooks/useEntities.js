@@ -1,8 +1,4 @@
-import {
-  useQuery,
-  useInfiniteQuery,
-  useQueryClient,
-} from "@tanstack/react-query";
+import { useQuery, useInfiniteQuery } from "@tanstack/react-query";
 import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 import apiClient from "../services/api-client";
@@ -16,15 +12,15 @@ const useEntities = ({
   infiniteQuery = false,
 }) => {
   const navigate = useNavigate();
-  const queryClient = useQueryClient();
 
   const getAuth = () => {
-    const auth = queryClient.getQueryData("auth");
+    const auth = localStorage.getItem("auth");
     if (!appendAuth || !auth) return {};
+    const auth_data = JSON.parse(auth);
     return {
       headers: {
         "Content-Type": "application/json",
-        Authorization: "JWT " + auth.access,
+        Authorization: "Bearer " + auth_data.accessToken,
       },
     };
   };
