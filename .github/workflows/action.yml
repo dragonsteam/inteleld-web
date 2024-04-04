@@ -26,6 +26,12 @@ jobs:
           docker build . --file Dockerfile --tag ${{env.REGISTRY}}/${{env.IMAGE_NAME}}
           docker push ${{env.REGISTRY}}/${{env.IMAGE_NAME}}
 
+  trigger-deploy:
+    needs: publish
+    name: Trigger Deploy using Dispatch
+    runs-on: self-hosted
+
+    steps:
       - name: Repository Dispatch
         uses: peter-evans/repository-dispatch@v3
         with:
