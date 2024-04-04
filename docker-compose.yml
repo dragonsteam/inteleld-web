@@ -4,12 +4,10 @@ version: "3.8"
 
 services:
   web:
-    container_name: oeliks-web
-    image: ghcr.io/dragonsteam/oeliks-front:latest
+    container_name: inteleld-web
+    image: ghcr.io/dragonsteam/inteleld-web:latest
     build: .
     command: npm run build
-    # environment:
-    # - DJANGO_SETTINGS_MODULE=core.settings.dev
 
     # volumes:
     #   - dist:/app/dist

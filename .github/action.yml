@@ -1,0 +1,39 @@
+name: Docker Image CI
+
+on:
+  push:
+    branches: ["main"]
+  # pull_request:
+  #   branches: [ "main" ]
+
+env:
+  REGISTRY: ghcr.io
+  IMAGE_NAME: dragonsteam/inteleld-web:latest
+
+jobs:
+  publish:
+    name: publish image
+    runs-on: self-hosted
+    # runs-on: ubuntu:latest
+
+    steps:
+      - uses: actions/checkout@v3
+      - name: Login
+        run: |
+          echo ${{secrets.GHCR_TOKEN}} | docker login ghcr.io -u dragonsteam --password-stdin
+      - name: Build and Publish
+        run: |
+          docker build . --file Dockerfile --tag ${{env.REGISTRY}}/${{env.IMAGE_NAME}}
+          docker push ${{env.REGISTRY}}/${{env.IMAGE_NAME}}
+
+  # deploy:
+  #   needs: publish
+  #   name: deploy to server
+  #   runs-on: self-hosted
+
+  #   steps:
+  #     - name: apply changes in frontend to server
+  #       run: |
+  #         cd ${{env.OELIKS_WORKDIR}}
+  #         docker compose -f docker-compose.prod.yml pull
+  #         docker compose -f docker-compose.prod.yml up -d
