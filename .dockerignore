@@ -2,6 +2,7 @@
 .git
 .cache
 .tox
+.github/
 deps/
 node_modules/
 storage/
