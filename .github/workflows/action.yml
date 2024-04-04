@@ -28,7 +28,7 @@ jobs:
 
   trigger-deploy:
     needs: publish
-    name: Trigger Deploy using Dispatch
+    name: Trigger Deploy
     runs-on: self-hosted
 
     steps:
@@ -38,15 +38,3 @@ jobs:
           token: ${{ secrets.PAT }}
           repository: dragonsteam/inteleld
           event-type: deploy-event
-
-  # deploy:
-  #   needs: publish
-  #   name: deploy to server
-  #   runs-on: self-hosted
-
-  #   steps:
-  #     - name: apply changes in frontend to server
-  #       run: |
-  #         cd ${{env.OELIKS_WORKDIR}}
-  #         docker compose -f docker-compose.prod.yml pull
-  #         docker compose -f docker-compose.prod.yml up -d
