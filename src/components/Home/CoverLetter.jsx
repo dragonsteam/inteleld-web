@@ -13,7 +13,7 @@ const CoverLetter = () => {
       <br />
       <Text color="yellow.500" as="kbd" fontWeight="bold">
         Warning: project is not complete yet, so DO NOT SUBMIT ANY PERSONAL
-        INFORMATION as they are likely easy to be stolen by hackers.
+        INFORMATION! They can be easily stolen by hackers.
       </Text>
     </Box>
   );

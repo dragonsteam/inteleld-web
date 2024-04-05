@@ -6,6 +6,8 @@ import {
   Checkbox,
   Box,
   Heading,
+  Grid,
+  GridItem,
 } from "@chakra-ui/react";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
@@ -19,19 +21,20 @@ import { getErrorMsg } from "../../util";
 import FormInput from "../common/FormInput";
 import FormInputPasswd from "../common/FormInputPasswd";
 import FormSelect from "../common/FormSelect";
+import FormTextarea from "../common/FormTextarea";
 
 export const schema = z.object({
   // truck: z.number({ invalid_type_error: "Truck is required" }).positive(),
   user: z.object({
-    first_name: z.string().min(3),
-    last_name: z.string().min(3),
-    username: z.string().min(2),
+    first_name: z.string(),
+    last_name: z.string(),
+    username: z.string().min(4),
     email: z.string().email(),
     password: z.string(),
   }),
-  cdl_number: z.string().min(5),
+  cdl_number: z.string(),
   cdl_state: z.string(),
-  phone: z.string().min(3).max(13),
+  phone: z.string().max(13),
   allow_pc: z.boolean(),
   allow_ym: z.boolean(),
   notes: z.string().max(255),
@@ -74,8 +77,16 @@ const NewDriver = () => {
       <Heading mb={30}>Add a driver</Heading>
 
       <form id="driver-form" onSubmit={handleSubmit(onSubmit)}>
-        <Stack spacing={10}>
-          <HStack>
+        <Stack spacing={8}>
+          <Grid
+            templateColumns={{
+              sm: "repeat(1, 1fr)",
+              md: "repeat(2, 1fr)",
+              lg: "repeat(4, 1fr)",
+            }}
+            mt={15}
+            gap={8}
+          >
             <FormInput
               type="text"
               placeholder="First name"
@@ -108,8 +119,6 @@ const NewDriver = () => {
               errMsg={errors.user?.email?.message}
               resErrMsg={getErrorMsg(resErrors, "user.email")}
             />
-          </HStack>
-          <HStack>
             <FormInputPasswd
               placeholder="Password"
               id="user.password"
@@ -148,10 +157,9 @@ const NewDriver = () => {
                 );
               })}
             </FormSelect>
-          </HStack>
+          </Grid>
           <HStack>
-            <FormInput
-              type="text"
+            <FormTextarea
               placeholder="Notes"
               id="notes"
               conf={register("notes")}
