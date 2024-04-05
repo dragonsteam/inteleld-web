@@ -6,7 +6,10 @@ import {
   useReactTable,
 } from "@tanstack/react-table";
 import {
+  chakra,
+  useDisclosure,
   Box,
+  HStack,
   Table,
   Thead,
   Tbody,
@@ -17,6 +20,13 @@ import {
   TableCaption,
   TableContainer,
 } from "@chakra-ui/react";
+import { FaPen, FaTrash } from "react-icons/fa";
+
+import useRequest from "../../hooks/useRequest";
+import DeleteDriver from "./DeleteDriver";
+
+const CFaPen = chakra(FaPen);
+const CFaTrash = chakra(FaTrash);
 
 const columnHelper = createColumnHelper();
 
@@ -65,7 +75,7 @@ const columns = [
   //   }),
 ];
 
-const DriverTable = ({ data: driver_data }) => {
+const DriverTable = ({ data: driver_data, refetchDrivers }) => {
   const [data, _setData] = useState(() =>
     driver_data ? [...driver_data] : []
   );
@@ -75,6 +85,24 @@ const DriverTable = ({ data: driver_data }) => {
     columns,
     getCoreRowModel: getCoreRowModel(),
   });
+
+  const { deleteRecord, isLoading, errorMsg, resErrors } = useRequest({
+    url: "/api/drivers/",
+    appendAuth: true,
+    redirectOn401: true,
+  });
+
+  const deleteModal = useDisclosure();
+  const [deleteId, setDeleteId] = useState(null);
+  const handleDelete = () => {
+    deleteRecord({
+      recordUrl: "/api/drivers/" + deleteId,
+      callback: () => {
+        deleteModal.onClose();
+        refetchDrivers();
+      },
+    });
+  };
 
   return (
     <Box>
@@ -104,11 +132,31 @@ const DriverTable = ({ data: driver_data }) => {
                   {flexRender(cell.column.columnDef.cell, cell.getContext())}
                 </Td>
               ))}
-              <Td>action</Td>
+              <Td>
+                <HStack fontSize={20}>
+                  <CFaPen color="orange.400" _hover={{ cursor: "pointer" }} />
+                  <CFaTrash
+                    ml={3}
+                    color="tomato"
+                    _hover={{ cursor: "pointer" }}
+                    onClick={() => {
+                      setDeleteId(row.original.id);
+                      deleteModal.onOpen();
+                    }}
+                  />
+                </HStack>
+              </Td>
             </Tr>
           ))}
         </Tbody>
       </Table>
+      <DeleteDriver
+        isOpen={deleteModal.isOpen}
+        onOpen={deleteModal.onOpen}
+        onClose={deleteModal.onClose}
+        handleDelete={handleDelete}
+        isLoading={isLoading}
+      />
     </Box>
   );
 };
