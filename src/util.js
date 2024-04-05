@@ -42,3 +42,15 @@ export const limitText = (text, limit) => {
   if (text.length > limit) return text.slice(0, limit) + "...";
   return text;
 };
+
+export const getLocalAuthData = (appendAuth) => {
+  const auth = localStorage.getItem("auth");
+  if (!appendAuth || !auth) return {};
+  const auth_data = JSON.parse(auth);
+  return {
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: "Bearer " + auth_data.accessToken,
+    },
+  };
+};

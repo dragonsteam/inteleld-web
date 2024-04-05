@@ -1,6 +1,8 @@
 import { useQuery, useInfiniteQuery } from "@tanstack/react-query";
 import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
+
+import { getLocalAuthData } from "../util";
 import apiClient from "../services/api-client";
 
 const useEntities = ({
@@ -13,22 +15,10 @@ const useEntities = ({
 }) => {
   const navigate = useNavigate();
 
-  const getAuth = () => {
-    const auth = localStorage.getItem("auth");
-    if (!appendAuth || !auth) return {};
-    const auth_data = JSON.parse(auth);
-    return {
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: "Bearer " + auth_data.accessToken,
-      },
-    };
-  };
-
   const fetchEntities = ({ pageParam = 1 }) =>
     apiClient
       .get(url, {
-        ...getAuth(),
+        ...getLocalAuthData(appendAuth),
         params: infiniteQuery ? { page: pageParam } : {},
       })
       .then((res) => {

@@ -2,6 +2,7 @@ import { CanceledError } from "axios";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
+import { getLocalAuthData } from "../util";
 import apiClient from "../services/api-client";
 
 const useRequest = ({ url, redirectOn401 = false, appendAuth = false }) => {
@@ -11,17 +12,6 @@ const useRequest = ({ url, redirectOn401 = false, appendAuth = false }) => {
   const [errorMsg, setErrorMsg] = useState("");
   const [resErrors, setResErrors] = useState({});
   const [isLoading, setLoading] = useState(false);
-  //
-
-  const getAuth = () => {
-    const authdata = localStorage.getItem("auth");
-    if (!appendAuth || !authdata) return {};
-    const auth = JSON.parse(authdata);
-    return {
-      // "Content-Type": "application/json", // this is preventing from posting file
-      Authorization: "JWT " + auth.accessToken,
-    };
-  };
 
   const post = ({
     data,
@@ -34,7 +24,10 @@ const useRequest = ({ url, redirectOn401 = false, appendAuth = false }) => {
     setErrorMsg("");
     setResErrors({});
     apiClient
-      .post(url, data, { headers: getAuth(), onUploadProgress: uploadHandler })
+      .post(url, data, {
+        ...getLocalAuthData(appendAuth),
+        onUploadProgress: uploadHandler,
+      })
       .then((res) => {
         setResData(res.data);
         setLoading(false);
