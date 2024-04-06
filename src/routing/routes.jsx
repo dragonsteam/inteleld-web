@@ -6,6 +6,8 @@ import Drivers from "../components/Drivers/Drivers";
 import NewDriver from "../components/Drivers/NewDriver";
 import EditDriver from "../components/Drivers/EditDriver";
 import Trucks from "../components/Trucks/Trucks";
+import NewTruck from "../components/Trucks/NewTruck";
+import EditTruck from "../components/Trucks/EditTruck";
 import Messages from "../components/Messages/Messages";
 import Setting from "../components/Settings/Setting";
 import Login from "../components/Login/Login";
@@ -29,6 +31,9 @@ const router = createBrowserRouter([
       { path: "drivers/edit/:id", element: <EditDriver /> },
 
       { path: "trucks", element: <Trucks /> },
+      { path: "trucks/new", element: <NewTruck /> },
+      { path: "trucks/edit/:id", element: <EditTruck /> },
+
       { path: "messages", element: <Messages /> },
       { path: "settings", element: <Setting /> },
     ],

@@ -37,7 +37,7 @@ export const schema = z.object({
   phone: z.string().max(13),
   allow_pc: z.boolean(),
   allow_ym: z.boolean(),
-  notes: z.string().max(255),
+  notes: z.string(),
 });
 
 const NewDriver = () => {
