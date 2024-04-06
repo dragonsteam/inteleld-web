@@ -56,10 +56,15 @@ const useRequest = ({ url, redirectOn401 = false, appendAuth = false }) => {
       .catch((err) => handleError(err, errCallback));
   };
 
-  const put = ({ data, callback = () => {}, errCallback = () => {} }) => {
+  const put = ({
+    recordUrl,
+    data,
+    callback = () => {},
+    errCallback = () => {},
+  }) => {
     resetData();
     apiClient
-      .put(url, data, { ...getLocalAuthData(appendAuth) })
+      .put(recordUrl, data, { ...getLocalAuthData(appendAuth) })
       .then((res) => handleResponse(res, callback))
       .catch((err) => handleError(err, errCallback));
   };

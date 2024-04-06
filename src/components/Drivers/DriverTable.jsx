@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import {
   createColumnHelper,
   flexRender,
@@ -32,13 +33,13 @@ const CFaTrash = chakra(FaTrash);
 const columnHelper = createColumnHelper();
 
 const columns = [
-  columnHelper.accessor("first_name", {
+  columnHelper.accessor("user.first_name", {
     header: "First name",
   }),
-  columnHelper.accessor("last_name", {
+  columnHelper.accessor("user.last_name", {
     header: "Last name",
   }),
-  columnHelper.accessor("username", {
+  columnHelper.accessor("user.username", {
     header: "Username",
   }),
   columnHelper.accessor("co_driver", {
@@ -77,6 +78,7 @@ const columns = [
 ];
 
 const DriverTable = ({ data: driver_data }) => {
+  const navigate = useNavigate();
   const queryClient = useQueryClient();
 
   const [data, setData] = useState(() => []);
@@ -140,7 +142,13 @@ const DriverTable = ({ data: driver_data }) => {
               ))}
               <Td>
                 <HStack fontSize={20}>
-                  <CFaPen color="orange.400" _hover={{ cursor: "pointer" }} />
+                  <CFaPen
+                    color="orange.400"
+                    _hover={{ cursor: "pointer" }}
+                    onClick={() => {
+                      navigate("/drivers/edit/" + row.original.id);
+                    }}
+                  />
                   <CFaTrash
                     ml={3}
                     color="tomato"

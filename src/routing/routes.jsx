@@ -4,6 +4,7 @@ import Home from "../components/Home/Home";
 import EldLogs from "../components/EldLogs/EldLogs";
 import Drivers from "../components/Drivers/Drivers";
 import NewDriver from "../components/Drivers/NewDriver";
+import EditDriver from "../components/Drivers/EditDriver";
 import Trucks from "../components/Trucks/Trucks";
 import Messages from "../components/Messages/Messages";
 import Setting from "../components/Settings/Setting";
@@ -25,12 +26,11 @@ const router = createBrowserRouter([
 
       { path: "drivers", element: <Drivers /> },
       { path: "drivers/new", element: <NewDriver /> },
+      { path: "drivers/edit/:id", element: <EditDriver /> },
 
       { path: "trucks", element: <Trucks /> },
       { path: "messages", element: <Messages /> },
       { path: "settings", element: <Setting /> },
-
-      // { path: "vendor/:id", element: <Vendor /> },
     ],
   },
   { path: "*", element: <PageNotFound /> },

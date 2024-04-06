@@ -9,28 +9,27 @@ import {
   Grid,
   GridItem,
 } from "@chakra-ui/react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useQueryClient } from "@tanstack/react-query";
 
 import { STATES } from "../../const";
+import useEntities from "../../hooks/useEntities";
 import useRequest from "../../hooks/useRequest";
 import { getErrorMsg } from "../../util";
 import FormInput from "../common/FormInput";
-import FormInputPasswd from "../common/FormInputPasswd";
 import FormSelect from "../common/FormSelect";
 import FormTextarea from "../common/FormTextarea";
+import { useEffect } from "react";
 
 export const schema = z.object({
-  // truck: z.number({ invalid_type_error: "Truck is required" }).positive(),
   user: z.object({
     first_name: z.string(),
     last_name: z.string(),
     username: z.string().min(4),
     email: z.string().email(),
-    password: z.string(),
   }),
   cdl_number: z.string(),
   cdl_state: z.string(),
@@ -40,15 +39,10 @@ export const schema = z.object({
   notes: z.string().max(255),
 });
 
-const NewDriver = () => {
+const EditDriver = () => {
   const navigate = useNavigate();
   const queryClient = useQueryClient();
-
-  const { post, isLoading, errorMsg, resErrors } = useRequest({
-    url: "/api/drivers/",
-    appendAuth: true,
-    redirectOn401: true,
-  });
+  const { id: driver_id } = useParams();
 
   const {
     register,
@@ -59,12 +53,30 @@ const NewDriver = () => {
     resolver: zodResolver(schema),
   });
 
+  const driverInstance = useEntities({
+    keys: ["drivers", driver_id],
+    url: "/api/drivers/" + driver_id,
+    staleTime: 5 * 60 * 1000,
+    appendAuth: true,
+    redirectOn401: true,
+  });
+
+  useEffect(() => {
+    if (driverInstance.data) reset(driverInstance.data);
+  }, [driverInstance.data]);
+
+  const { put, isLoading, errorMsg, resErrors } = useRequest({
+    appendAuth: true,
+    redirectOn401: true,
+  });
+
   const onSubmit = async (data) => {
-    post({
+    put({
+      recordUrl: `/api/drivers/${driver_id}/`,
       data: data,
       callback: () => {
-        reset();
         queryClient.invalidateQueries({ queryKey: ["drivers"] });
+        // queryClient.invalidateQueries({ queryKey: ["drivers", driver_id] });
         navigate("/drivers");
       },
     });
@@ -72,7 +84,7 @@ const NewDriver = () => {
 
   return (
     <Box w={{ base: "100%", lg: "100%" }} m="auto" px="20px">
-      <Heading mb={30}>Add a driver</Heading>
+      <Heading mb={30}>Edit driver</Heading>
 
       <form id="driver-form" onSubmit={handleSubmit(onSubmit)}>
         <Stack spacing={8}>
@@ -117,13 +129,9 @@ const NewDriver = () => {
               errMsg={errors.user?.email?.message}
               resErrMsg={getErrorMsg(resErrors, "user.email")}
             />
-            <FormInputPasswd
-              placeholder="Password"
-              id="user.password"
-              conf={register("user.password")}
-              errMsg={errors.user?.password?.message}
-              resErrMsg={getErrorMsg(resErrors, "user.password")}
-            />
+            <Button colorScheme="blue" variant="outline">
+              Reset Password
+            </Button>
             <FormInput
               type="text"
               placeholder="Phone number"
@@ -204,4 +212,4 @@ const NewDriver = () => {
   );
 };
 
-export default NewDriver;
+export default EditDriver;
