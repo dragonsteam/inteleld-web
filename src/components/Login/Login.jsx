@@ -47,13 +47,13 @@ const Login = () => {
   const onSubmit = (data) => {
     post({
       data: data,
-      callback: (data) => {
+      callback: (res) => {
         window.localStorage.setItem(
           "auth",
           JSON.stringify({
-            user_id: JWTDecoder(data.access).user_id,
-            accessToken: data?.access,
-            refreshToken: data?.refresh,
+            user_id: JWTDecoder(res.data.access).user_id,
+            accessToken: res.data?.access,
+            refreshToken: res.data?.refresh,
           })
         );
         navigate("/");
