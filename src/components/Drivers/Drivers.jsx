@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { Box, Button, HStack, Heading, Text } from "@chakra-ui/react";
 
@@ -10,7 +11,7 @@ const Drivers = () => {
   const { data, error, isLoading } = useEntities({
     keys: ["drivers"],
     url: "/api/drivers",
-    staleTime: 3 * 60 * 1000,
+    staleTime: 5 * 60 * 1000,
     appendAuth: true,
     redirectOn401: true,
   });

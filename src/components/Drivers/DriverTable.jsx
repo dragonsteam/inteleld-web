@@ -1,10 +1,11 @@
-import { useState, useReducer } from "react";
+import { useState, useEffect } from "react";
 import {
   createColumnHelper,
   flexRender,
   getCoreRowModel,
   useReactTable,
 } from "@tanstack/react-table";
+import { useQueryClient } from "@tanstack/react-query";
 import {
   chakra,
   useDisclosure,
@@ -75,10 +76,13 @@ const columns = [
   //   }),
 ];
 
-const DriverTable = ({ data: driver_data, refetchDrivers }) => {
-  const [data, _setData] = useState(() =>
-    driver_data ? [...driver_data] : []
-  );
+const DriverTable = ({ data: driver_data }) => {
+  const queryClient = useQueryClient();
+
+  const [data, setData] = useState(() => []);
+  useEffect(() => {
+    setData(() => (driver_data ? [...driver_data] : []));
+  }, [driver_data]);
 
   const table = useReactTable({
     data,
@@ -99,7 +103,9 @@ const DriverTable = ({ data: driver_data, refetchDrivers }) => {
       recordUrl: "/api/drivers/" + deleteId,
       callback: () => {
         deleteModal.onClose();
-        refetchDrivers();
+        queryClient.invalidateQueries({ queryKey: ["drivers"] });
+        // queryClient.refetchQueries({ queryKey: ["drivers"] });
+        // queryClient.removeQueries({ queryKey: ["drivers"] });
       },
     });
   };

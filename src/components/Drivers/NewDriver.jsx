@@ -14,6 +14,7 @@ import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useQueryClient } from "@tanstack/react-query";
 
 import { STATES } from "../../const";
 import useRequest from "../../hooks/useRequest";
@@ -42,6 +43,7 @@ export const schema = z.object({
 
 const NewDriver = () => {
   const navigate = useNavigate();
+  const queryClient = useQueryClient();
 
   const { post, isLoading, errorMsg, resErrors } = useRequest({
     url: "/api/drivers/",
@@ -63,6 +65,7 @@ const NewDriver = () => {
       data: data,
       callback: () => {
         reset();
+        queryClient.invalidateQueries({ queryKey: ["drivers"] });
         navigate("/drivers");
       },
     });
