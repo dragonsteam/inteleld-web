@@ -1,7 +1,8 @@
 import { createBrowserRouter } from "react-router-dom";
 import Layout from "../components/Layout";
 import Home from "../components/Home/Home";
-import EldLogs from "../components/EldLogs/EldLogs";
+import DriverLogs from "../components/DriverLogs/DriverLogs";
+import DriverLog from "../components/DriverLogs/DriverLog";
 import Drivers from "../components/Drivers/Drivers";
 import NewDriver from "../components/Drivers/NewDriver";
 import EditDriver from "../components/Drivers/EditDriver";
@@ -24,7 +25,8 @@ const router = createBrowserRouter([
     element: <Layout />,
     children: [
       { path: "", element: <Home /> },
-      { path: "eld-logs", element: <EldLogs /> },
+      { path: "driver-logs", element: <DriverLogs /> },
+      { path: "driver-logs/:id", element: <DriverLog /> },
 
       { path: "drivers", element: <Drivers /> },
       { path: "drivers/new", element: <NewDriver /> },

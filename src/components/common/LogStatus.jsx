@@ -9,7 +9,7 @@ const logStatusMap = [
   { status: "dr", color: "green.500", text: "DR" },
 ];
 
-const LogStatus = ({ status }: { status: string }) => {
+const LogStatus = ({ status }) => {
   const map = logStatusMap.find((m) => m.status === status);
   return (
     <Box

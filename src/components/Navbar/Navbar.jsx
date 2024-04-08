@@ -14,7 +14,7 @@ import {
 const Navbar = ({ handleCloseMenu = () => {} }) => {
   const data = [
     { name: "Home", link: "/", icon: <TbHome size="23px" /> },
-    { name: "Logs", link: "/eld-logs", icon: <TbStack2 size="23px" /> },
+    { name: "Logs", link: "/driver-logs", icon: <TbStack2 size="23px" /> },
     { name: "Drivers", link: "/drivers", icon: <TbUsers size="23px" /> },
     { name: "Trucks", link: "/trucks", icon: <TbTruck size="23px" /> },
     { name: "Messages", link: "/messages", icon: <TbMessage size="23px" /> },
