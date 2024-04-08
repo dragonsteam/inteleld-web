@@ -9,20 +9,24 @@ import {
   Td,
   HStack,
 } from "@chakra-ui/react";
+import { useParams } from "react-router-dom";
 import { FaPen } from "react-icons/fa";
+
 import useEntities from "../../hooks/useEntities";
-import LogChart from "./LogChart";
 import Msg from "../common/Msg";
 import LogStatus from "../common/LogStatus";
+import LogChart from "./LogChart";
 
 const CFaPen = chakra(FaPen);
 
 const DriverLog = () => {
-  const { data, error, isLoading, refetch } = useEntities({
+  const { id: driver_id } = useParams();
+  const { data, error, isLoading } = useEntities({
     keys: ["logs"],
-    url: "/drivers/1/logs/01-24-2024",
+    url: `/api/drivers/${driver_id}/logs/`,
     staleTime: 3 * 60 * 1000,
-    logoutOn404: true,
+    appendAuth: true,
+    redirectOn401: true,
   });
 
   return (
@@ -57,7 +61,7 @@ const DriverLog = () => {
                   </Td>
                   <Td>{log.time}</Td>
                   <Td>*</Td>
-                  <Td>{log.location.address}</Td>
+                  <Td>{log.location?.address}</Td>
                   <Td>
                     {log.truck || (
                       <Msg level="error" bold>
