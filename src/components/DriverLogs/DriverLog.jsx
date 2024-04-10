@@ -1,5 +1,6 @@
 import {
   chakra,
+  Box,
   Table,
   TableContainer,
   Thead,
@@ -9,29 +10,42 @@ import {
   Td,
   HStack,
 } from "@chakra-ui/react";
+import { useState } from "react";
 import { useParams } from "react-router-dom";
 import { FaPen } from "react-icons/fa";
 
 import useEntities from "../../hooks/useEntities";
 import Msg from "../common/Msg";
 import LogStatus from "../common/LogStatus";
+import ControlButtons from "./ControlButtons";
 import LogChart from "./LogChart";
+import LogFrom from "./LogFrom";
 
 const CFaPen = chakra(FaPen);
 
 const DriverLog = () => {
   const { id: driver_id } = useParams();
   const { data, error, isLoading } = useEntities({
-    keys: ["logs"],
+    keys: ["driver_logs", driver_id],
     url: `/api/drivers/${driver_id}/logs/`,
     staleTime: 3 * 60 * 1000,
     appendAuth: true,
     redirectOn401: true,
   });
 
+  const [formState, setFormState] = useState("closed");
+
+  const handleInsert = () => {
+    setFormState("insert");
+  };
+
   return (
-    <>
+    <Box w={{ base: "100%", lg: "100%" }} m="auto" px="20px">
+      <ControlButtons formState={formState} handleInsert={handleInsert} />
+
       <LogChart logs={data || []} />
+
+      <LogFrom formState={formState} />
 
       <TableContainer mt={10}>
         <Table variant="simple">
@@ -92,7 +106,7 @@ const DriverLog = () => {
           </Tbody>
         </Table>
       </TableContainer>
-    </>
+    </Box>
   );
 };
 

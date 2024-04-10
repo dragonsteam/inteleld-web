@@ -51,6 +51,9 @@ const columns = [
   columnHelper.accessor("app_version", {
     header: "App version",
   }),
+  columnHelper.accessor("last_login", {
+    header: "Last login",
+  }),
 
   //   columnHelper.accessor((row) => row.lastName, {
   //     id: "lastName",
