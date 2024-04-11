@@ -58,7 +58,7 @@ const DriverLog = () => {
       data: data,
       callback: () => {
         queryClient.invalidateQueries({
-          queryKey: ["drivers", driver_id, date],
+          queryKey: ["driver_logs", driver_id, date],
         });
         setFormState("closed");
         // navigate("/drivers");
