@@ -7,44 +7,33 @@ import {
   Heading,
   Grid,
 } from "@chakra-ui/react";
-import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useQueryClient } from "@tanstack/react-query";
 
 import { STATES } from "../../const";
-import useRequest from "../../hooks/useRequest";
-import { getErrorMsg } from "../../util";
+import { formatTime, getErrorMsg } from "../../util";
 import FormInput from "../common/FormInput";
 import FormSelect from "../common/FormSelect";
+import LogButtons from "./LogButtons";
 
 export const schema = z.object({
   time: z.string(),
   time_end: z.string(),
-  location: z.object({
-    address: z.string(),
-    latitude: z.number(),
-    longitude: z.number(),
-  }),
+  // location: z.object({
+  //   address: z.string(),
+  //   latitude: z.number(),
+  //   longitude: z.number(),
+  // }),
   odometer: z.number(),
   eng_hours: z.number(),
   notes: z.string(),
-  truck: z.number(),
+  // truck: z.number(),
   document: z.string(),
   trailer: z.string(),
 });
 
-const LogForm = ({ formState = "closed" }) => {
-  const navigate = useNavigate();
-  const queryClient = useQueryClient();
-
-  const { post, isLoading, errorMsg, resErrors } = useRequest({
-    url: "/api/drivers/",
-    appendAuth: true,
-    redirectOn401: true,
-  });
-
+const LogForm = ({ formState = "closed", handleSubmitLog, resErrors = {} }) => {
   const {
     register,
     handleSubmit,
@@ -55,19 +44,15 @@ const LogForm = ({ formState = "closed" }) => {
   });
 
   const onSubmit = async (data) => {
-    post({
-      data: data,
-      callback: () => {
-        reset();
-        queryClient.invalidateQueries({ queryKey: ["drivers"] });
-        navigate("/drivers");
-      },
-    });
+    data.time = formatTime(data.time);
+    data.time_end = formatTime(data.time_end);
+    handleSubmitLog(data);
   };
 
   if (formState === "closed") return <></>;
   return (
-    <Box mt="30">
+    <Box mt="30" w={{ base: "100%", lg: "85%" }} mx="auto">
+      <LogButtons />
       <form id="driverlog-form" onSubmit={handleSubmit(onSubmit)}>
         <Stack spacing={8}>
           <Grid
@@ -102,16 +87,16 @@ const LogForm = ({ formState = "closed" }) => {
                 type="number"
                 label="Latitude"
                 id="location.latitude"
-                conf={register("location.latitude")}
-                errMsg={errors.location?.latitude.message}
+                conf={register("location.latitude", { valueAsNumber: true })}
+                errMsg={errors.location?.latitude?.message}
                 resErrMsg={getErrorMsg(resErrors, "location.latitude")}
               />
               <FormInput
                 type="number"
                 label="Longitude"
                 id="location.longitude"
-                conf={register("location.longitude")}
-                errMsg={errors.location?.longitude.message}
+                conf={register("location.longitude", { valueAsNumber: true })}
+                errMsg={errors.location?.longitude?.message}
                 resErrMsg={getErrorMsg(resErrors, "location.longitude")}
               />
             </HStack>
@@ -127,7 +112,7 @@ const LogForm = ({ formState = "closed" }) => {
               type="number"
               label="Odometer"
               id="odometer"
-              conf={register("odometer")}
+              conf={register("odometer", { valueAsNumber: true })}
               errMsg={errors.odometer?.message}
               resErrMsg={getErrorMsg(resErrors, "odometer")}
             />
@@ -135,7 +120,7 @@ const LogForm = ({ formState = "closed" }) => {
               type="number"
               label="Eng. hours"
               id="eng_hours"
-              conf={register("eng_hours")}
+              conf={register("eng_hours", { valueAsNumber: true })}
               errMsg={errors.eng_hours?.message}
               resErrMsg={getErrorMsg(resErrors, "eng_hours")}
             />
@@ -179,11 +164,11 @@ const LogForm = ({ formState = "closed" }) => {
               resErrMsg={getErrorMsg(resErrors, "trailer")}
             />
           </Grid>
-          {errorMsg && (
+          {/* {errorMsg && (
             <Text fontSize={15} color="tomato">
               {errorMsg}
             </Text>
-          )}
+          )} */}
         </Stack>
       </form>
     </Box>

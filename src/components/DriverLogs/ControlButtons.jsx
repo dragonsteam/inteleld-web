@@ -1,25 +1,37 @@
 import { HStack, Button, Box } from "@chakra-ui/react";
 
-const ControlButtons = ({ formState = "closed", handleInsert }) => {
+const ControlButtons = ({ formState = "closed", handlers }) => {
   return (
     <HStack justify="space-between">
       <Box></Box>
-      <HStack my={10} spacing={5}>
-        <Button
-          onClick={() => {
-            handleInsert();
-          }}
-        >
-          Insert Log
-        </Button>
-        {/* <Button
-          // isLoading={isLoading}
-          type="submit"
-          form="driverlog-form"
-        >
-          Save
-        </Button> */}
-      </HStack>
+      {formState === "closed" && (
+        <HStack my={10} spacing={5}>
+          <Button
+            colorScheme="blue"
+            onClick={() => {
+              handlers.insert();
+            }}
+          >
+            Insert Log
+          </Button>
+        </HStack>
+      )}
+      {formState === "insert" && (
+        <HStack my={10} spacing={5}>
+          <Button
+            colorScheme="blue"
+            variant="outline"
+            onClick={() => {
+              handlers.cancel();
+            }}
+          >
+            Cancel
+          </Button>
+          <Button colorScheme="blue" type="submit" form="driverlog-form">
+            Save
+          </Button>
+        </HStack>
+      )}
     </HStack>
   );
 };

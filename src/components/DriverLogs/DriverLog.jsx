@@ -15,6 +15,7 @@ import { useParams } from "react-router-dom";
 import { FaPen } from "react-icons/fa";
 
 import useEntities from "../../hooks/useEntities";
+import useRequest from "../../hooks/useRequest";
 import Msg from "../common/Msg";
 import LogStatus from "../common/LogStatus";
 import ControlButtons from "./ControlButtons";
@@ -33,19 +34,46 @@ const DriverLog = () => {
     redirectOn401: true,
   });
 
+  const { post, errorMsg, resErrors } = useRequest({
+    url: `/api/drivers/${driver_id}/logs/`,
+    appendAuth: true,
+    redirectOn401: true,
+  });
+
   const [formState, setFormState] = useState("closed");
 
   const handleInsert = () => {
     setFormState("insert");
   };
+  const handleCancel = () => {
+    setFormState("closed");
+  };
+  const handleSubmit = (data) => {
+    console.log("post data", data);
+    post({
+      data: data,
+      callback: () => {
+        // reset();
+        // queryClient.invalidateQueries({ queryKey: ["drivers"] });
+        // navigate("/drivers");
+      },
+    });
+  };
 
   return (
     <Box w={{ base: "100%", lg: "100%" }} m="auto" px="20px">
-      <ControlButtons formState={formState} handleInsert={handleInsert} />
+      <ControlButtons
+        formState={formState}
+        handlers={{ insert: handleInsert, cancel: handleCancel }}
+      />
 
       <LogChart logs={data || []} />
 
-      <LogFrom formState={formState} />
+      <LogFrom
+        formState={formState}
+        handleSubmitLog={handleSubmit}
+        resErrors={resErrors}
+      />
 
       <TableContainer mt={10}>
         <Table variant="simple">

@@ -54,3 +54,7 @@ export const getLocalAuthData = (appendAuth) => {
     },
   };
 };
+
+export const formatTime = (time_str) => {
+  return time_str + ":00";
+};
