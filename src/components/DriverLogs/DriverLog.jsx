@@ -11,6 +11,7 @@ import {
   HStack,
 } from "@chakra-ui/react";
 import { useState } from "react";
+import { useQueryClient } from "@tanstack/react-query";
 import { useParams } from "react-router-dom";
 import { FaPen } from "react-icons/fa";
 
@@ -25,10 +26,11 @@ import LogFrom from "./LogFrom";
 const CFaPen = chakra(FaPen);
 
 const DriverLog = () => {
-  const { id: driver_id } = useParams();
+  const queryClient = useQueryClient();
+  const { id: driver_id, date } = useParams();
   const { data, error, isLoading } = useEntities({
-    keys: ["driver_logs", driver_id],
-    url: `/api/drivers/${driver_id}/logs/`,
+    keys: ["driver_logs", driver_id, date],
+    url: `/api/drivers/${driver_id}/logs/?date=${date}`,
     staleTime: 3 * 60 * 1000,
     appendAuth: true,
     redirectOn401: true,
@@ -49,12 +51,16 @@ const DriverLog = () => {
     setFormState("closed");
   };
   const handleSubmit = (data) => {
+    // set date
+    data.date = date;
     console.log("post data", data);
     post({
       data: data,
       callback: () => {
-        // reset();
-        // queryClient.invalidateQueries({ queryKey: ["drivers"] });
+        queryClient.invalidateQueries({
+          queryKey: ["drivers", driver_id, date],
+        });
+        setFormState("closed");
         // navigate("/drivers");
       },
     });
@@ -134,6 +140,7 @@ const DriverLog = () => {
           </Tbody>
         </Table>
       </TableContainer>
+      <Box h="400px"></Box>
     </Box>
   );
 };

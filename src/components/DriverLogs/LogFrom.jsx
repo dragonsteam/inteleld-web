@@ -7,6 +7,7 @@ import {
   Heading,
   Grid,
 } from "@chakra-ui/react";
+import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -18,6 +19,7 @@ import FormSelect from "../common/FormSelect";
 import LogButtons from "./LogButtons";
 
 export const schema = z.object({
+  // status: z.string(),
   time: z.string(),
   time_end: z.string(),
   // location: z.object({
@@ -43,7 +45,10 @@ const LogForm = ({ formState = "closed", handleSubmitLog, resErrors = {} }) => {
     resolver: zodResolver(schema),
   });
 
+  const [logStatus, setLogStatus] = useState("of");
+
   const onSubmit = async (data) => {
+    data.status = logStatus;
     data.time = formatTime(data.time);
     data.time_end = formatTime(data.time_end);
     handleSubmitLog(data);
@@ -52,7 +57,7 @@ const LogForm = ({ formState = "closed", handleSubmitLog, resErrors = {} }) => {
   if (formState === "closed") return <></>;
   return (
     <Box mt="30" w={{ base: "100%", lg: "85%" }} mx="auto">
-      <LogButtons />
+      <LogButtons status={logStatus} setStatus={setLogStatus} />
       <form id="driverlog-form" onSubmit={handleSubmit(onSubmit)}>
         <Stack spacing={8}>
           <Grid

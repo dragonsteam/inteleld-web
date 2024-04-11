@@ -9,9 +9,11 @@ import {
   Td,
   Text,
   HStack,
+  Box,
 } from "@chakra-ui/react";
 import { useNavigate } from "react-router-dom";
 import { FaTruck } from "react-icons/fa";
+import { getDate } from "../../util";
 import useEntities from "../../hooks/useEntities";
 import Spinner from "../common/Spinner";
 import Msg from "../common/Msg";
@@ -49,7 +51,7 @@ const DriverLogs = () => {
   });
 
   return (
-    <>
+    <Box>
       <TableContainer>
         <Table variant="simple">
           <Thead>
@@ -74,7 +76,7 @@ const DriverLogs = () => {
                   key={driver.id}
                   _hover={{ cursor: "pointer" }}
                   onClick={() => {
-                    navigate("/driver-logs/" + driver.id);
+                    navigate(`/driver-logs/${driver.id}/${getDate()}`);
                   }}
                 >
                   <Td isNumeric>{index + 1}</Td>
@@ -112,7 +114,7 @@ const DriverLogs = () => {
       {isLoading && <Spinner />}
 
       {error && <Msg level="error">{error.message}</Msg>}
-    </>
+    </Box>
   );
 };
 

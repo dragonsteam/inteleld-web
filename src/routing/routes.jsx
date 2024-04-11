@@ -26,7 +26,7 @@ const router = createBrowserRouter([
     children: [
       { path: "", element: <Home /> },
       { path: "driver-logs", element: <DriverLogs /> },
-      { path: "driver-logs/:id", element: <DriverLog /> },
+      { path: "driver-logs/:id/:date", element: <DriverLog /> },
 
       { path: "drivers", element: <Drivers /> },
       { path: "drivers/new", element: <NewDriver /> },

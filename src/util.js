@@ -17,12 +17,30 @@ export const mps2mph = (mps) => {
   return parseFloat((mps * 2.237).toFixed(2));
 };
 
-export const getDateString = (strDate) => {
-  let datetime = new Date(strDate);
-  return datetime
-    .toLocaleString("en-US", { timeZone: "US/Eastern" })
-    .split(",")[0];
+export const getDate = () => {
+  var currentDate = new Date();
+  var year = currentDate.getFullYear();
+  var month = currentDate.getMonth() + 1; // Adding 1 because getMonth() returns zero-based month index
+  var day = currentDate.getDate();
+
+  // Format the date as a string (YYYY-MM-DD)
+  var dateString =
+    year +
+    "-" +
+    (month < 10 ? "0" : "") +
+    month +
+    "-" +
+    (day < 10 ? "0" : "") +
+    day;
+  return dateString;
 };
+
+// export const getDateString = (strDate) => {
+//   let datetime = new Date(strDate);
+//   return datetime
+//     .toLocaleString("en-US", { timeZone: "US/Eastern" })
+//     .split(",")[0];
+// };
 
 export const getErrorMsg = (data, index) => {
   let indexes = index.split(".");
