@@ -17,8 +17,8 @@ export const mps2mph = (mps) => {
   return parseFloat((mps * 2.237).toFixed(2));
 };
 
-export const getDate = () => {
-  var currentDate = new Date();
+export const getDateInStr = (date = undefined) => {
+  var currentDate = date ? date : new Date();
   var year = currentDate.getFullYear();
   var month = currentDate.getMonth() + 1; // Adding 1 because getMonth() returns zero-based month index
   var day = currentDate.getDate();

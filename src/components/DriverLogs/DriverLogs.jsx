@@ -13,7 +13,7 @@ import {
 } from "@chakra-ui/react";
 import { useNavigate } from "react-router-dom";
 import { FaTruck } from "react-icons/fa";
-import { getDate } from "../../util";
+import { getDateInStr } from "../../util";
 import useEntities from "../../hooks/useEntities";
 import Spinner from "../common/Spinner";
 import Msg from "../common/Msg";
@@ -76,7 +76,7 @@ const DriverLogs = () => {
                   key={driver.id}
                   _hover={{ cursor: "pointer" }}
                   onClick={() => {
-                    navigate(`/driver-logs/${driver.id}/${getDate()}`);
+                    navigate(`/driver-logs/${driver.id}/${getDateInStr()}`);
                   }}
                 >
                   <Td isNumeric>{index + 1}</Td>

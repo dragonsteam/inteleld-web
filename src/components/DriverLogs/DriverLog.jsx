@@ -19,6 +19,7 @@ import useEntities from "../../hooks/useEntities";
 import useRequest from "../../hooks/useRequest";
 import Msg from "../common/Msg";
 import LogStatus from "../common/LogStatus";
+import DayChangeButtons from "./DayChangeButtons";
 import ControlButtons from "./ControlButtons";
 import LogChart from "./LogChart";
 import LogFrom from "./LogFrom";
@@ -68,10 +69,13 @@ const DriverLog = () => {
 
   return (
     <Box w={{ base: "100%", lg: "100%" }} m="auto" px="20px">
-      <ControlButtons
-        formState={formState}
-        handlers={{ insert: handleInsert, cancel: handleCancel }}
-      />
+      <HStack justify="space-between">
+        <DayChangeButtons driver_id={driver_id} currDateStr={date} />
+        <ControlButtons
+          formState={formState}
+          handlers={{ insert: handleInsert, cancel: handleCancel }}
+        />
+      </HStack>
 
       <LogChart logs={data || []} />
 

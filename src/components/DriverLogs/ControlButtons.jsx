@@ -2,8 +2,7 @@ import { HStack, Button, Box } from "@chakra-ui/react";
 
 const ControlButtons = ({ formState = "closed", handlers }) => {
   return (
-    <HStack justify="space-between">
-      <Box></Box>
+    <Box>
       {formState === "closed" && (
         <HStack my={10} spacing={5}>
           <Button
@@ -32,7 +31,7 @@ const ControlButtons = ({ formState = "closed", handlers }) => {
           </Button>
         </HStack>
       )}
-    </HStack>
+    </Box>
   );
 };
 
