@@ -23,6 +23,10 @@
     height: 2px;
   }
 
+  span.v {
+    width: 2px;
+  }
+
   .of {
     top: 13%;
   }

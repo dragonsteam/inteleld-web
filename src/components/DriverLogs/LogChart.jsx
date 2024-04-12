@@ -33,7 +33,7 @@ const timeInSeconds = (time) => {
 const getLogLeft = (time) => {
   var seconds = timeInSeconds(time);
   var left = (seconds * 100) / dayInSeconds; // calculate left margin in %
-  return left + "%";
+  return left;
 };
 
 const getLogWidth = (data, index) => {
@@ -45,10 +45,22 @@ const getLogWidth = (data, index) => {
 
   var width = ((l2 - l1) * 100) / dayInSeconds;
 
-  return width + "%";
+  return width;
 };
 
-const getLogVertical = (data, index) => {};
+const getLogVertical = (data, index) => {
+  var h1 = logStatusMap.find((e) => e.status == data[index].status).top;
+  var h2 =
+    index === data.length - 1
+      ? h1
+      : logStatusMap.find((e) => e.status == data[index + 1].status).top;
+  // top
+  const t = Math.min(h1, h2);
+  // height
+  const h = Math.abs(h1 - h2);
+
+  return [t, h];
+};
 
 const LogChart = ({ logs: logs_data = [] }) => {
   const [logs, setLogs] = useState([]);
@@ -69,8 +81,21 @@ const LogChart = ({ logs: logs_data = [] }) => {
               key={log.id}
               className={log.status}
               style={{
-                left: getLogLeft(log.time),
-                width: getLogWidth(logs, index),
+                left: getLogLeft(log.time) + "%",
+                width: getLogWidth(logs, index) + "%",
+              }}
+            ></span>
+          );
+        })}
+        {logs?.map((log, index) => {
+          return (
+            <span
+              key={log.id}
+              className="v"
+              style={{
+                left: getLogLeft(log.time) + getLogWidth(logs, index) + "%",
+                top: getLogVertical(logs, index)[0] + "%",
+                height: getLogVertical(logs, index)[1] + 1 + "%",
               }}
             ></span>
           );
