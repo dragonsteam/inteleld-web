@@ -5,35 +5,52 @@ import {
   Text,
   Flex,
   Heading,
-  Input,
-  InputLeftAddon,
-  InputGroup,
   Stack,
-  InputLeftElement,
   chakra,
   Button,
   Box,
   Link,
-  FormControl,
-  InputRightElement,
+  Grid,
+  HStack,
 } from "@chakra-ui/react";
 import { FaUserAlt, FaLock } from "react-icons/fa";
+import { z } from "zod";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { getErrorMsg } from "../util";
 import useRequest from "../hooks/useRequest";
 import Msg from "./common/Msg";
-import SpinnerButton from "./common/SpinnerButton";
+import FormInput from "./common/FormInput";
+import FormInputPasswd from "./common/FormInputPasswd";
 
 const CFaUserAlt = chakra(FaUserAlt);
 const CFaLock = chakra(FaLock);
 
+export const schema = z.object({
+  // truck: z.number({ invalid_type_error: "Truck is required" }).positive(),
+  user: z.object({
+    first_name: z.string(),
+    last_name: z.string(),
+    username: z.string().min(4),
+    email: z.string().email(),
+    password: z.string(),
+  }),
+  company: z.object({
+    name: z.string(),
+    usdot: z.number(),
+  }),
+});
+
 const Login = () => {
   const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
-  const { post, isLoading, errorMsg } = useRequest({ url: "/register/" });
+  const { post, isLoading, errorMsg, resErrors } = useRequest({
+    url: "/register/",
+  });
   const {
     register,
     handleSubmit,
     formState: { errors, isValid },
-  } = useForm();
+  } = useForm({ resolver: zodResolver(schema) });
 
   const handleShowClick = () => setShowPassword(!showPassword);
 
@@ -56,71 +73,109 @@ const Login = () => {
       alignItems="center"
     >
       <Stack
-        flexDir="column"
         mb="2"
+        p="1rem"
         justifyContent="center"
         alignItems="center"
+        boxShadow="lg"
+        borderRadius={5}
       >
         <Heading color="blue.400">Register</Heading>
-        <Box minW={{ base: "90%", md: "468px" }}>
-          <form onSubmit={handleSubmit(onSubmit)}>
-            <Stack spacing={4} p="1rem" boxShadow="lg">
-              <FormControl>
-                <InputGroup>
-                  {/* <InputLeftElement
-                    pointerEvents="none"
-                    children={<CFaUserAlt color="gray.300" />}
-                  /> */}
-                  <InputLeftAddon>+998</InputLeftAddon>
-                  <Input
-                    type="text"
-                    placeholder="phone"
-                    id="phone"
-                    {...register("phone", { required: true })}
-                  />
-                </InputGroup>
-                {errors.phone?.type === "required" && (
-                  <Msg level="error">The phone field is required</Msg>
-                )}
-              </FormControl>
-              <FormControl>
-                <InputGroup>
-                  <InputLeftElement
-                    pointerEvents="none"
-                    color="gray.300"
-                    children={<CFaLock color="gray.300" />}
-                  />
-                  <Input
-                    type={showPassword ? "text" : "password"}
-                    placeholder="Password"
-                    id="password"
-                    {...register("password", { required: true })}
-                  />
-                  <InputRightElement width="4.5rem">
-                    <Button h="1.75rem" size="sm" onClick={handleShowClick}>
-                      {showPassword ? "Hide" : "Show"}
-                    </Button>
-                  </InputRightElement>
-                </InputGroup>
-                {errors.password?.type === "required" && (
-                  <Msg level="error">The password field is required</Msg>
-                )}
-              </FormControl>
-              {errorMsg && (
-                <Text fontSize={15} color="tomato">
-                  {errorMsg}
-                </Text>
-              )}
-              {isLoading ? (
-                <SpinnerButton />
-              ) : (
-                <Button disabled={!isValid} type="submit" colorScheme="blue">
-                  Submit
-                </Button>
-              )}
-            </Stack>
-          </form>
-        </Box>
+        <form onSubmit={handleSubmit(onSubmit)}>
+          <Grid
+            // templateColumns={{
+            //   sm: "repeat(1, 1fr)",
+            //   md: "repeat(2, 1fr)",
+            //   lg: "repeat(4, 1fr)",
+            // }}
+            mt={15}
+            gap={8}
+          >
+            <HStack spacing={8}>
+              <FormInput
+                type="text"
+                label="First name"
+                id="user.first_name"
+                conf={register("user.first_name")}
+                errMsg={errors.user?.first_name?.message}
+                resErrMsg={getErrorMsg(resErrors, "user.first_name")}
+              />
+              <FormInput
+                type="text"
+                label="Last name"
+                id="user.last_name"
+                conf={register("user.last_name")}
+                errMsg={errors.user?.last_name?.message}
+                resErrMsg={getErrorMsg(resErrors, "user.last_name")}
+              />
+            </HStack>
+            <HStack spacing={8}>
+              <FormInput
+                type="text"
+                label="Username"
+                id="user.username"
+                conf={register("user.username")}
+                errMsg={errors.user?.username?.message}
+                resErrMsg={getErrorMsg(resErrors, "user.username")}
+              />
+              <FormInput
+                type="text"
+                label="Phone"
+                id="user.phone"
+                conf={register("user.phone")}
+                errMsg={errors.user?.phone?.message}
+                resErrMsg={getErrorMsg(resErrors, "user.phone")}
+              />
+            </HStack>
+            <HStack spacing={8}>
+              <FormInputPasswd
+                label="Password"
+                id="user.password"
+                conf={register("user.password")}
+                errMsg={errors.user?.password?.message}
+                resErrMsg={getErrorMsg(resErrors, "user.password")}
+              />
+              <FormInputPasswd
+                label="Confirm Password"
+                id="user.password"
+                conf={register("user.password")}
+                errMsg={errors.user?.password?.message}
+                resErrMsg={getErrorMsg(resErrors, "user.password")}
+              />
+            </HStack>
+            <HStack spacing={8}>
+              <FormInput
+                type="text"
+                label="Company name"
+                id="company.name"
+                conf={register("company.name")}
+                errMsg={errors.company?.name?.message}
+                resErrMsg={getErrorMsg(resErrors, "company.name")}
+              />
+              <FormInput
+                type="number"
+                label="Usdot"
+                id="company.usdot"
+                conf={register("company.usdot")}
+                errMsg={errors.company?.usdot?.message}
+                resErrMsg={getErrorMsg(resErrors, "company.usdot")}
+              />
+            </HStack>
+            {errorMsg && (
+              <Msg level="error" bold>
+                {errorMsg}
+              </Msg>
+            )}
+            <Button
+              disabled={!isValid}
+              type="submit"
+              colorScheme="blue"
+              isLoading={isLoading}
+            >
+              Submit
+            </Button>
+          </Grid>
+        </form>
       </Stack>
       <Box>
         Already have one?{" "}

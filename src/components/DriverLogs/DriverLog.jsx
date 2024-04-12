@@ -113,7 +113,9 @@ const DriverLog = () => {
                   </Td>
                   <Td>{log.time}</Td>
                   <Td>*</Td>
-                  <Td>{log.location?.address}</Td>
+                  <Td>
+                    {log.address}; {log.latitude}, {log.longitude}
+                  </Td>
                   <Td>
                     {log.truck || (
                       <Msg level="error" bold>

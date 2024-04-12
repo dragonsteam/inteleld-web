@@ -1,4 +1,5 @@
 import {
+  Text,
   Button,
   FormControl,
   Input,
@@ -10,6 +11,7 @@ import Msg from "./Msg";
 
 const FormInputPasswd = ({
   id,
+  label,
   placeholder,
   conf,
   errMsg,
@@ -19,6 +21,7 @@ const FormInputPasswd = ({
   const handleShowClick = () => setShowPassword(!showPassword);
   return (
     <FormControl>
+      <Text>{label}</Text>
       <InputGroup>
         <Input
           type={showPassword ? "text" : "password"}

@@ -79,7 +79,7 @@ const Login = () => {
         <Heading color="blue.400">Welcome</Heading>
         <Box minW={{ base: "90%", md: "468px" }}>
           <form onSubmit={handleSubmit(onSubmit)}>
-            <Stack spacing={4} p="1rem" boxShadow="lg">
+            <Stack spacing={4} p="1rem" boxShadow="lg" borderRadius={5}>
               <Divider />
               <FormControl>
                 <InputGroup>
