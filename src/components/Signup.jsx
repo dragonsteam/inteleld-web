@@ -12,6 +12,7 @@ import {
   Link,
   Grid,
   HStack,
+  NumberInputField,
 } from "@chakra-ui/react";
 import { FaUserAlt, FaLock } from "react-icons/fa";
 import { z } from "zod";
@@ -26,17 +27,14 @@ const CFaUserAlt = chakra(FaUserAlt);
 const CFaLock = chakra(FaLock);
 
 export const schema = z.object({
-  // truck: z.number({ invalid_type_error: "Truck is required" }).positive(),
+  name: z.string(),
+  usdot: z.number(),
   user: z.object({
     first_name: z.string(),
     last_name: z.string(),
     username: z.string().min(4),
-    email: z.string().email(),
+    // email: z.string().email(),
     password: z.string(),
-  }),
-  company: z.object({
-    name: z.string(),
-    usdot: z.number(),
   }),
 });
 
@@ -44,7 +42,7 @@ const Login = () => {
   const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
   const { post, isLoading, errorMsg, resErrors } = useRequest({
-    url: "/register/",
+    url: "/api/companies/new/",
   });
   const {
     register,
@@ -137,28 +135,28 @@ const Login = () => {
               />
               <FormInputPasswd
                 label="Confirm Password"
-                id="user.password"
-                conf={register("user.password")}
-                errMsg={errors.user?.password?.message}
-                resErrMsg={getErrorMsg(resErrors, "user.password")}
+                id="user.confirm_password"
+                conf={register("user.confirm_password")}
+                errMsg={errors.user?.confirm_password?.message}
+                resErrMsg={getErrorMsg(resErrors, "user.confirm_password")}
               />
             </HStack>
             <HStack spacing={8}>
               <FormInput
                 type="text"
                 label="Company name"
-                id="company.name"
-                conf={register("company.name")}
-                errMsg={errors.company?.name?.message}
-                resErrMsg={getErrorMsg(resErrors, "company.name")}
+                id="name"
+                conf={register("name")}
+                errMsg={errors.name?.message}
+                resErrMsg={getErrorMsg(resErrors, "name")}
               />
               <FormInput
                 type="number"
                 label="Usdot"
-                id="company.usdot"
-                conf={register("company.usdot")}
-                errMsg={errors.company?.usdot?.message}
-                resErrMsg={getErrorMsg(resErrors, "company.usdot")}
+                id="usdot"
+                conf={register("usdot", { valueAsNumber: true })}
+                errMsg={errors.usdot?.message}
+                resErrMsg={getErrorMsg(resErrors, "usdot")}
               />
             </HStack>
             {errorMsg && (
