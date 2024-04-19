@@ -88,14 +88,14 @@ const Login = () => {
                     children={<CFaUserAlt color="gray.300" />}
                   />
                   <Input
-                    type="text"
-                    placeholder="username"
-                    id="username"
-                    {...register("username", { required: true })}
+                    type="email"
+                    placeholder="email"
+                    id="email"
+                    {...register("email", { required: true })}
                   />
                 </InputGroup>
-                {errors.username?.type === "required" && (
-                  <Msg level="error">The username field is required</Msg>
+                {errors.email?.type === "required" && (
+                  <Msg level="error">The email field is required</Msg>
                 )}
               </FormControl>
               <FormControl>

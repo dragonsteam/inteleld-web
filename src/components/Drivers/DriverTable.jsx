@@ -39,8 +39,8 @@ const columns = [
   columnHelper.accessor("user.last_name", {
     header: "Last name",
   }),
-  columnHelper.accessor("user.username", {
-    header: "Username",
+  columnHelper.accessor("user.email", {
+    header: "Email",
   }),
   columnHelper.accessor("co_driver", {
     header: "Co Driver",

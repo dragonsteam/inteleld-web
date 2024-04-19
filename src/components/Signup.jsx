@@ -32,7 +32,7 @@ export const schema = z.object({
   user: z.object({
     first_name: z.string(),
     last_name: z.string(),
-    username: z.string().min(4),
+    email: z.string().min(4),
     // email: z.string().email(),
     password: z.string(),
   }),
@@ -110,11 +110,11 @@ const Login = () => {
             <HStack spacing={8}>
               <FormInput
                 type="text"
-                label="Username"
-                id="user.username"
-                conf={register("user.username")}
-                errMsg={errors.user?.username?.message}
-                resErrMsg={getErrorMsg(resErrors, "user.username")}
+                label="email"
+                id="user.email"
+                conf={register("user.email")}
+                errMsg={errors.user?.email?.message}
+                resErrMsg={getErrorMsg(resErrors, "user.email")}
               />
               <FormInput
                 type="text"
