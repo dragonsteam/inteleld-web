@@ -19,7 +19,7 @@ const AuthModule = ({ authContent, AUTH_TITLE, isForRegistre = false }) => {
         }}
       >
         <Col xs={{ span: 24 }} sm={{ span: 24 }} md={{ span: 0 }} span={0}>
-          <img
+          {/* <img
             src={logo}
             alt="Logo"
             style={{
@@ -28,7 +28,8 @@ const AuthModule = ({ authContent, AUTH_TITLE, isForRegistre = false }) => {
             }}
             height={63}
             width={220}
-          />
+          /> */}
+          <h1>Logo here</h1>
           <div className="space10" />
         </Col>
         <Title level={1}>{AUTH_TITLE}</Title>
