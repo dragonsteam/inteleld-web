@@ -1,6 +1,7 @@
 import { Navigate } from 'react-router-dom';
 
 import Dashboard from '@/pages/Dashboard';
+import Drivers from '@/pages/Drivers';
 import NotFoundPage from '@/pages/NotFound';
 
 let routes = {
@@ -19,6 +20,8 @@ let routes = {
     },
     //
     { path: '/', element: <Dashboard /> },
+    { path: '/drivers', element: <Drivers /> },
+
     { path: '*', element: <NotFoundPage /> },
   ],
 };

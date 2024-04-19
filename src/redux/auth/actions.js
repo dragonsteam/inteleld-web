@@ -14,7 +14,9 @@ export const login =
       });
     } else {
       const auth_state = {
-        current: data,
+        current: {
+          tokens: data,
+        },
         isLoggedIn: true,
         isLoading: false,
         isSuccess: true,
