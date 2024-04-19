@@ -1,6 +1,8 @@
 // ELD OS - ELD online state
 import { Suspense, lazy } from 'react';
+import { useSelector } from 'react-redux';
 
+import { selectAuth } from '@/redux/auth/selector';
 import AuthRouter from '@/router/AuthRouter';
 import PageLoader from '@/components/PageLoader';
 
@@ -44,7 +46,7 @@ const DefaultApp = () => {
 };
 
 export default function EldOs() {
-  const isLoggedIn = false;
+  const { isLoggedIn } = useSelector(selectAuth);
 
   if (!isLoggedIn) return <AuthRouter />;
   return <DefaultApp />;
