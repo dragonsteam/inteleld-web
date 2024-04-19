@@ -1,6 +1,6 @@
 import { Navigate } from 'react-router-dom';
 
-import Home from '@/components/Home/Home';
+import Dashboard from '@/pages/Dashboard';
 import NotFoundPage from '@/pages/NotFound';
 
 let routes = {
@@ -18,7 +18,7 @@ let routes = {
       element: <Navigate to="/" />,
     },
     //
-    { path: '/', element: <Home /> },
+    { path: '/', element: <Dashboard /> },
     { path: '*', element: <NotFoundPage /> },
   ],
 };

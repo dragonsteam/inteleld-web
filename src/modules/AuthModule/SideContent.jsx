@@ -1,5 +1,4 @@
 import { Space, Layout, Divider, Typography } from 'antd';
-import logo from '@/style/images/idurar-crm-erp.svg';
 
 const { Content } = Layout;
 const { Title, Text } = Typography;

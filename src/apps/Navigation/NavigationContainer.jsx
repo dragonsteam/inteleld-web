@@ -4,9 +4,6 @@ import { Button, Drawer, Layout, Menu } from 'antd';
 
 // import { useAppContext } from '@/context/appContext';
 
-import logoIcon from '@/style/images/logo-icon.svg';
-import logoText from '@/style/images/logo-text.svg';
-
 // import useResponsive from '@/hooks/useResponsive';
 
 import {
@@ -15,16 +12,12 @@ import {
   ContainerOutlined,
   FileSyncOutlined,
   DashboardOutlined,
-  TagOutlined,
-  TagsOutlined,
   UserOutlined,
   CreditCardOutlined,
   MenuOutlined,
   FileOutlined,
   ShopOutlined,
   FilterOutlined,
-  WalletOutlined,
-  ReconciliationOutlined,
 } from '@ant-design/icons';
 import { useSelector } from 'react-redux';
 // import { selectLangDirection } from '@/redux/translate/selectors';
@@ -56,52 +49,52 @@ function Sidebar({ collapsible, isMobile = false }) {
     {
       key: 'dashboard',
       icon: <DashboardOutlined />,
-      label: <Link to={'/'}>dashboard</Link>,
+      label: <Link to={'/'}>Dashboard</Link>,
     },
     {
       key: 'track',
       icon: <EnvironmentOutlined />,
-      label: <Link to={'/track'}>tracking</Link>,
+      label: <Link to={'/track'}>Tracking</Link>,
     },
     {
       key: 'driver-log',
       icon: <FileOutlined />,
-      label: <Link to={'/driver-log'}>driver logs</Link>,
+      label: <Link to={'/driver-log'}>Driver Logs</Link>,
     },
     {
       key: 'drivers',
       icon: <UserOutlined />,
-      label: <Link to={'/drivers'}>drivers</Link>,
+      label: <Link to={'/drivers'}>Drivers</Link>,
     },
     {
       key: 'company',
       icon: <ShopOutlined />,
-      label: <Link to={'/company'}>companies</Link>,
+      label: <Link to={'/company'}>Companies</Link>,
     },
     {
       key: 'lead',
       icon: <FilterOutlined />,
-      label: <Link to={'/lead'}>leads</Link>,
+      label: <Link to={'/lead'}>Leads</Link>,
     },
     {
       key: 'invoice',
       icon: <ContainerOutlined />,
-      label: <Link to={'/invoice'}>invoices</Link>,
+      label: <Link to={'/invoice'}>Invoices</Link>,
     },
     {
       key: 'quote',
       icon: <FileSyncOutlined />,
-      label: <Link to={'/quote'}>proforma invoices</Link>,
+      label: <Link to={'/quote'}>Proforma Invoices</Link>,
     },
     {
       key: 'payment',
       icon: <CreditCardOutlined />,
-      label: <Link to={'/payment'}>payments</Link>,
+      label: <Link to={'/payment'}>Payments</Link>,
     },
     {
       key: 'employee',
       icon: <UserOutlined />,
-      label: <Link to={'/employee'}>employee</Link>,
+      label: <Link to={'/employee'}>Employee</Link>,
     },
 
     {
@@ -112,32 +105,23 @@ function Sidebar({ collapsible, isMobile = false }) {
         {
           key: 'admin',
           // icon: <TeamOutlined />,
-          label: <Link to={'/admin'}>admin</Link>,
+          label: <Link to={'/admin'}>Admin</Link>,
         },
         {
           key: 'generalSettings',
-          label: <Link to={'/settings'}>settings</Link>,
+          label: <Link to={'/settings'}>Settings</Link>,
         },
-        {
-          key: 'currency',
-          label: <Link to={'/settings/currency'}>currencies</Link>,
-        },
-
-        // {
-        //   key: 'emailTemplates',
-        //   label: <Link to={'/email'}>email_templates</Link>,
-        // },
         {
           key: 'paymentMode',
-          label: <Link to={'/payment/mode'}>payments_mode</Link>,
+          label: <Link to={'/payment/mode'}>Payment Mode</Link>,
         },
         {
           key: 'taxes',
-          label: <Link to={'/taxes'}>taxes</Link>,
+          label: <Link to={'/taxes'}>Taxes</Link>,
         },
         {
           key: 'about',
-          label: <Link to={'/about'}>about</Link>,
+          label: <Link to={'/about'}>About</Link>,
         },
       ],
     },
@@ -196,19 +180,8 @@ function Sidebar({ collapsible, isMobile = false }) {
           cursor: 'pointer',
         }}
       >
-        <img src={logoIcon} alt="Logo" style={{ marginLeft: '-5px', height: '40px' }} />
-
-        {!showLogoApp && (
-          <img
-            src={logoText}
-            alt="Logo"
-            style={{
-              marginTop: '3px',
-              marginLeft: '10px',
-              height: '38px',
-            }}
-          />
-        )}
+        {/* <img src={logoIcon} alt="Logo" style={{ marginLeft: '-5px', height: '40px' }} /> */}
+        <h1>Logo here</h1>
       </div>
       <Menu
         items={items}
