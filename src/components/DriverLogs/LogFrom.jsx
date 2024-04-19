@@ -23,9 +23,9 @@ export const schema = z.object({
   time: z.string(),
   time_end: z.string(),
   // location: z.object({
-  //   address: z.string(),
-  //   latitude: z.number(),
-  //   longitude: z.number(),
+  address: z.string(),
+  latitude: z.number(),
+  longitude: z.number(),
   // }),
   odometer: z.number(),
   eng_hours: z.number(),
@@ -91,27 +91,27 @@ const LogForm = ({ formState = "closed", handleSubmitLog, resErrors = {} }) => {
               <FormInput
                 type="number"
                 label="Latitude"
-                id="location.latitude"
-                conf={register("location.latitude", { valueAsNumber: true })}
-                errMsg={errors.location?.latitude?.message}
-                resErrMsg={getErrorMsg(resErrors, "location.latitude")}
+                id="latitude"
+                conf={register("latitude", { valueAsNumber: true })}
+                errMsg={errors.latitude?.message}
+                resErrMsg={getErrorMsg(resErrors, "latitude")}
               />
               <FormInput
                 type="number"
                 label="Longitude"
-                id="location.longitude"
-                conf={register("location.longitude", { valueAsNumber: true })}
-                errMsg={errors.location?.longitude?.message}
-                resErrMsg={getErrorMsg(resErrors, "location.longitude")}
+                id="longitude"
+                conf={register("longitude", { valueAsNumber: true })}
+                errMsg={errors.longitude?.message}
+                resErrMsg={getErrorMsg(resErrors, "longitude")}
               />
             </HStack>
             <FormInput
               type="text"
               label="Location address"
-              id="location.address"
-              conf={register("location.address")}
-              errMsg={errors.location?.address?.message}
-              resErrMsg={getErrorMsg(resErrors, "location.address")}
+              id="address"
+              conf={register("address")}
+              errMsg={errors.address?.message}
+              resErrMsg={getErrorMsg(resErrors, "address")}
             />
             <FormInput
               type="number"
