@@ -1,7 +1,8 @@
 import { Navigate } from 'react-router-dom';
 
 import Dashboard from '@/pages/Dashboard';
-import Drivers from '@/pages/Drivers';
+import Drivers from '@/pages/Drivers/Drivers';
+import Trucks from '@/pages/Trucks/Trucks';
 import NotFoundPage from '@/pages/NotFound';
 
 let routes = {
@@ -21,6 +22,7 @@ let routes = {
     //
     { path: '/', element: <Dashboard /> },
     { path: '/drivers', element: <Drivers /> },
+    { path: '/trucks', element: <Trucks /> },
 
     { path: '*', element: <NotFoundPage /> },
   ],

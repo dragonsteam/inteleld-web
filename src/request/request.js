@@ -30,6 +30,37 @@ const request = {
       return undefined;
     }
   },
+  create: async ({ entity, data }) => {
+    try {
+      const authHeaders = getAuthHeaders(true);
+
+      const response = await axios.post(entity + '/', data, {
+        headers: { ...authHeaders },
+      });
+
+      console.log('* create response', response);
+
+      return response.data;
+    } catch (error) {
+      console.log('***error', error);
+
+      return undefined;
+    }
+  },
+  delete: async ({ entity, id }) => {
+    try {
+      const authHeaders = getAuthHeaders(true);
+
+      const response = await axios.delete(entity + '/' + id, {
+        headers: { ...authHeaders },
+      });
+      console.log('* delete response', response);
+      return true;
+    } catch (error) {
+      console.log('***error', error);
+      return false;
+    }
+  },
 };
 
 export default request;

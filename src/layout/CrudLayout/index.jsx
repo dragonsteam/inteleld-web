@@ -1,41 +1,14 @@
 import { useEffect, useState } from 'react';
-
-// import DefaultLayout from '../DefaultLayout';
-
-// import SidePanel from '@/components/SidePanel';
 import { Layout } from 'antd';
+
+import SidePanel from '@/components/SidePanel/SidePanel';
+import { CrudContextProvider } from '@/context/crud';
 // import { useCrudContext } from '@/context/crud';
 // import { useAppContext } from '@/context/appContext';
 
 const { Content } = Layout;
 
 const ContentBox = ({ children }) => {
-  // const { state: stateCrud, crudContextAction } = useCrudContext();
-  // const { state: stateApp } = useAppContext();
-  // const { isPanelClose } = stateCrud;
-  // const { isNavMenuClose } = stateApp;
-  // const { panel } = crudContextAction;
-
-  // const [isSidePanelClose, setSidePanel] = useState(isPanelClose);
-
-  // useEffect(() => {
-  //   let timer = [];
-  //   if (isPanelClose) {
-  //     timer = setTimeout(() => {
-  //       setSidePanel(isPanelClose);
-  //     }, 200);
-  //   } else {
-  //     setSidePanel(isPanelClose);
-  //   }
-
-  //   return () => clearTimeout(timer);
-  // }, [isPanelClose]);
-
-  // useEffect(() => {
-  //   if (!isNavMenuClose) {
-  //     panel.close();
-  //   }
-  // }, [isNavMenuClose]);
   return (
     <Content
       className="whiteBox shadow layoutPadding"
@@ -51,26 +24,20 @@ const ContentBox = ({ children }) => {
   );
 };
 
-export default function CrudLayout({
-  children,
-  config,
-  sidePanelTopContent,
-  sidePanelBottomContent,
-  fixHeaderPanel,
-}) {
+export default function CrudLayout({ children, config }) {
   return (
     <>
-      <div>
+      <CrudContextProvider>
         {/* <SidePanel
           config={config}
           topContent={sidePanelTopContent}
           bottomContent={sidePanelBottomContent}
           fixHeaderPanel={fixHeaderPanel}
         ></SidePanel> */}
-        <>side panel</>
+        <SidePanel config={config} />
 
         <ContentBox> {children}</ContentBox>
-      </div>
+      </CrudContextProvider>
     </>
   );
 }

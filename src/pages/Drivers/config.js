@@ -1,7 +1,10 @@
 export const fields = {
-  firstname: {
-    type: 'string',
-    required: true,
+  user: {
+    type: 'object',
+    firstname: {
+      type: 'string',
+      required: true,
+    },
   },
   lastname: {
     type: 'string',
@@ -31,6 +34,9 @@ export const fields = {
     type: 'email',
   },
   app_version: {
+    type: 'string',
+  },
+  cdl_number: {
     type: 'string',
   },
   // bio: {

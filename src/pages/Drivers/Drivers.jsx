@@ -4,7 +4,7 @@ import { fields } from './config';
 
 export default function Drivers() {
   const config = {
-    PANEL_TITLE: 'driver',
+    PANEL_TITLE: 'Driver',
     DATATABLE_TITLE: 'Driver List',
     ADD_NEW_ENTITY: 'Add New Driver',
     ENTITY_NAME: 'driver',

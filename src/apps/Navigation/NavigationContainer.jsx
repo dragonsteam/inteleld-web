@@ -18,6 +18,7 @@ import {
   FileOutlined,
   ShopOutlined,
   FilterOutlined,
+  TruckOutlined,
 } from '@ant-design/icons';
 import { useSelector } from 'react-redux';
 // import { selectLangDirection } from '@/redux/translate/selectors';
@@ -65,6 +66,11 @@ function Sidebar({ collapsible, isMobile = false }) {
       key: 'drivers',
       icon: <UserOutlined />,
       label: <Link to={'/drivers'}>Drivers</Link>,
+    },
+    {
+      key: 'trucks',
+      icon: <TruckOutlined />,
+      label: <Link to={'/trucks'}>Trucks</Link>,
     },
     {
       key: 'company',

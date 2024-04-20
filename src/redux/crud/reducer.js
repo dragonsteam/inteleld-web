@@ -24,6 +24,7 @@ const INITIAL_STATE = {
     isLoading: false,
     isSuccess: false,
   },
+  create: INITIAL_KEY_STATE,
 };
 
 const crudReducer = (state = INITIAL_STATE, action) => {
@@ -37,15 +38,6 @@ const crudReducer = (state = INITIAL_STATE, action) => {
           isLoading: true,
         },
       };
-    case actionTypes.REQUEST_FAILED:
-      return {
-        ...state,
-        [keyState]: {
-          ...state[keyState],
-          isLoading: false,
-          isSuccess: false,
-        },
-      };
     case actionTypes.REQUEST_SUCCESS:
       return {
         ...state,
@@ -55,6 +47,16 @@ const crudReducer = (state = INITIAL_STATE, action) => {
           isSuccess: true,
         },
       };
+    case actionTypes.REQUEST_FAILED:
+      return {
+        ...state,
+        [keyState]: {
+          ...state[keyState],
+          isLoading: false,
+          isSuccess: false,
+        },
+      };
+
     default:
       return state;
   }
