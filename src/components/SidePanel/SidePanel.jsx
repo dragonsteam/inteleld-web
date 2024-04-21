@@ -14,7 +14,7 @@ export default function SidePanel({ config }) {
       title={PANEL_TITLE}
       placement="right"
       onClose={() => {
-        panel.collapse();
+        panel.close();
       }}
       open={panel.isOpen}
     >

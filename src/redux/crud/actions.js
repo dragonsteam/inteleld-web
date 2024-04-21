@@ -69,6 +69,11 @@ export const crud = {
   delete:
     ({ entity, id }) =>
     async (dispatch) => {
+      // dispatch({
+      //   type: actionTypes.RESET_ACTION,
+      //   keyState: 'delete',
+      // });
+
       dispatch({
         type: actionTypes.REQUEST_LOADING,
         keyState: 'delete',
@@ -81,7 +86,7 @@ export const crud = {
         dispatch({
           type: actionTypes.REQUEST_SUCCESS,
           keyState: 'delete',
-          payload: null,
+          payload: id,
         });
       } else {
         dispatch({

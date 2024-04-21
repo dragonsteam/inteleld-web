@@ -10,7 +10,7 @@ function CrudContextProvider({ children }) {
     open: () => {
       setSidePanelOpen(true);
     },
-    collapse: () => {
+    close: () => {
       setSidePanelOpen(false);
     },
   };

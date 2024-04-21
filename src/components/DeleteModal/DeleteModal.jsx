@@ -1,12 +1,14 @@
-import { useContext } from 'react';
-import { useDispatch } from 'react-redux';
+import { useContext, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { Modal } from 'antd';
 
 import { CrudContext } from '@/context/crud';
 import { crud } from '@/redux/crud/actions';
+import { selectDeletedItem } from '@/redux/crud/selector';
 
 export default function DeleteModal({ config }) {
   const dispatch = useDispatch();
+  const { isLoading, isSuccess } = useSelector(selectDeletedItem);
 
   const { deleteModal, currentAction } = useContext(CrudContext);
   const { entity } = config;
@@ -14,12 +16,17 @@ export default function DeleteModal({ config }) {
   const handleOK = () => {
     const { id } = currentAction.current.entity;
     dispatch(crud.delete({ entity, id }));
-    dispatch(crud.list({ entity }));
-    deleteModal.close();
   };
 
+  useEffect(() => {
+    if (isSuccess) {
+      deleteModal.close();
+      dispatch(crud.list({ entity }));
+    }
+  }, [isSuccess]);
+
   const handleCancel = () => {
-    deleteModal.close();
+    if (!isLoading) deleteModal.close();
   };
 
   return (
@@ -28,6 +35,7 @@ export default function DeleteModal({ config }) {
       open={deleteModal.isOpen}
       onOk={handleOK}
       onCancel={handleCancel}
+      confirmLoading={isLoading}
     >
       <p>Are You Sure You Want To Delete? This CANNOT BE Undone</p>
     </Modal>

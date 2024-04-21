@@ -20,7 +20,7 @@ export default function DynamicForm({ config }) {
 
   useEffect(() => {
     if (isSuccess) {
-      panel.collapse();
+      panel.close();
       dispatch(crud.list({ entity }));
     }
   }, [isSuccess]);

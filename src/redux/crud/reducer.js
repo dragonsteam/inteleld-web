@@ -2,7 +2,7 @@ import * as actionTypes from './types';
 
 const INITIAL_KEY_STATE = {
   result: null,
-  current: null,
+  // current: null,
   isLoading: false,
   isSuccess: false,
 };
@@ -15,7 +15,7 @@ const INITIAL_STATE = {
     result: {
       items: [],
       pagination: {
-        current: 1,
+        // current: 1,
         pageSize: 10,
         total: 1,
         showSizeChanger: false,
@@ -25,6 +25,7 @@ const INITIAL_STATE = {
     isSuccess: false,
   },
   create: INITIAL_KEY_STATE,
+  delete: INITIAL_KEY_STATE,
 };
 
 const crudReducer = (state = INITIAL_STATE, action) => {
