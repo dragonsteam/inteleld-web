@@ -29,11 +29,12 @@ export default function DynamicForm({ config }) {
     <Loading isLoading={isLoading}>
       <Form layout="vertical" onFinish={onSubmit}>
         {Object.keys(fields).map((key, index) => {
-          let field = fields[key];
+          const field = fields[key];
+          const fieldLabel = field.label || key;
 
           if (field.read_only) return; // skip read only field
 
-          return <FormElement key={index} field={field} name={key} />;
+          return <FormElement key={index} field={field} label={fieldLabel} />;
         })}
         <Form.Item>
           <Button type="primary" htmlType="submit">
@@ -45,11 +46,11 @@ export default function DynamicForm({ config }) {
   );
 }
 
-function FormElement({ field, name }) {
+function FormElement({ field, label }) {
   return (
     <Form.Item
-      label={name}
-      name={name}
+      label={label}
+      name={label}
       rules={[
         {
           required: field.required || false,
