@@ -21,9 +21,9 @@ export const crud = {
 
       let data = await request.list({ entity, options });
 
-      if (data) {
+      if (data.success) {
         const result = {
-          items: data.results,
+          items: data.result.results || [],
           pagination: null,
         };
         dispatch({
@@ -51,11 +51,11 @@ export const crud = {
 
       let resData = await request.create({ entity, data });
 
-      if (resData) {
+      if (resData.success) {
         dispatch({
           type: actionTypes.REQUEST_SUCCESS,
           keyState: 'create',
-          payload: data,
+          payload: resData.result,
         });
       } else {
         dispatch({
@@ -80,9 +80,9 @@ export const crud = {
         payload: null,
       });
 
-      let success = await request.delete({ entity, id });
+      let data = await request.delete({ entity, id });
 
-      if (success) {
+      if (data.success) {
         dispatch({
           type: actionTypes.REQUEST_SUCCESS,
           keyState: 'delete',

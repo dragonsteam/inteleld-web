@@ -13,7 +13,7 @@ export default function Map() {
       }}
     >
       <div style={{ width: '100%', aspectRatio: '16/9' }}>
-        <MapContainer center={[40, -100]} zoom={4}>
+        <MapContainer center={[40, -100]} zoom={5}>
           <TileLayer attribution="none" url="https://tile.openstreetmap.org/{z}/{x}/{y}.png" />
           {/* <Marker position={[40.505, -100.09]}>
           <Popup>I am a pop-up!</Popup>

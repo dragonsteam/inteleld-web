@@ -8,14 +8,10 @@ export const login =
 
     const data = await authService.login({ loginData });
 
-    if (data.success && data.success === false) {
-      dispatch({
-        type: actionTypes.REQUEST_FAILED,
-      });
-    } else {
+    if (data.success) {
       const auth_state = {
         current: {
-          tokens: data,
+          tokens: data.result,
         },
         isLoading: false,
         isSuccess: true,
@@ -29,6 +25,10 @@ export const login =
         payload: {
           data,
         },
+      });
+    } else {
+      dispatch({
+        type: actionTypes.REQUEST_FAILED,
       });
     }
   };

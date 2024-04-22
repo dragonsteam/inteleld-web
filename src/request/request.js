@@ -1,5 +1,8 @@
 import axios from 'axios';
+
 import { API_BASE_URL } from '@/config/serverApiConfig';
+import handleSuccess from './handleSuccess';
+import handleError from './handleError';
 
 axios.defaults.baseURL = API_BASE_URL;
 
@@ -22,12 +25,9 @@ const request = {
         headers: { ...authHeaders },
       });
 
-      console.log('* list response', response);
-
-      return response.data;
+      return handleSuccess(response);
     } catch (error) {
-      console.log('***error', error);
-      return undefined;
+      return handleError(error);
     }
   },
   create: async ({ entity, data }) => {
@@ -38,13 +38,9 @@ const request = {
         headers: { ...authHeaders },
       });
 
-      console.log('* create response', response);
-
-      return response.data;
+      return handleSuccess(response);
     } catch (error) {
-      console.log('***error', error);
-
-      return undefined;
+      return handleError(error);
     }
   },
   delete: async ({ entity, id }) => {
@@ -54,11 +50,10 @@ const request = {
       const response = await axios.delete(entity + '/' + id, {
         headers: { ...authHeaders },
       });
-      console.log('* delete response', response);
-      return true;
+
+      return handleSuccess(response);
     } catch (error) {
-      console.log('***error', error);
-      return false;
+      return handleError(error);
     }
   },
 };
