@@ -1,5 +1,5 @@
 import { useContext, useEffect } from 'react';
-import { Form, Input, Button } from 'antd';
+import { Form, Input, Button, Select } from 'antd';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { crud } from '@/redux/crud/actions';
@@ -13,6 +13,8 @@ export default function DynamicForm({ config }) {
   const { panel } = useContext(CrudContext);
 
   const onSubmit = (fieldsValue) => {
+    console.log('field values ::  ', fieldsValue);
+
     dispatch(crud.create({ entity, data: fieldsValue }));
   };
 
@@ -34,7 +36,7 @@ export default function DynamicForm({ config }) {
 
           if (field.read_only) return; // skip read only field
 
-          return <FormElement key={index} field={field} label={fieldLabel} />;
+          return <FormElement key={index} field={field} fieldName={key} label={fieldLabel} />;
         })}
         <Form.Item>
           <Button type="primary" htmlType="submit">
@@ -46,18 +48,37 @@ export default function DynamicForm({ config }) {
   );
 }
 
-function FormElement({ field, label }) {
+function FormElement({ field, fieldName, label }) {
+  const options = field.options || [];
+  const formItemComponent = {
+    string: <Input autoComplete="off" />,
+    select: (
+      <Select showSearch>
+        {options.map((option) => {
+          return (
+            <Select.Option key={option.value} value={option.value}>
+              {option.name}
+            </Select.Option>
+          );
+        })}
+      </Select>
+    ),
+  };
+
+  // console.log('filed****', <InputComponent />);
+
   return (
     <Form.Item
       label={label}
-      name={label}
+      name={fieldName}
       rules={[
         {
           required: field.required || false,
         },
       ]}
     >
-      <Input autoComplete="off" />
+      {/* <Input autoComplete="off" /> */}
+      {formItemComponent[field.type]}
     </Form.Item>
   );
 }
