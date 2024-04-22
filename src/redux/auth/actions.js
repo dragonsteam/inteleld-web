@@ -33,3 +33,13 @@ export const login =
       });
     }
   };
+
+export const logout = () => async (dispatch) => {
+  dispatch({
+    type: actionTypes.LOGOUT,
+  });
+
+  window.localStorage.removeItem('auth');
+  window.localStorage.removeItem('settings');
+  window.localStorage.setItem('isLogout', JSON.stringify({ isLogout: true }));
+};

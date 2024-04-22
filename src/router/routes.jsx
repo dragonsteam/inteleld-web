@@ -1,5 +1,6 @@
 import { Navigate } from 'react-router-dom';
 
+import Logout from '@/pages/Logout';
 import Dashboard from '@/pages/Dashboard';
 import Drivers from '@/pages/Drivers/Drivers';
 import Trucks from '@/pages/Trucks/Trucks';
@@ -10,6 +11,10 @@ let routes = {
     {
       path: '/login',
       element: <Navigate to="/" />,
+    },
+    {
+      path: '/logout',
+      element: <Logout />,
     },
     {
       path: '/verify/*',
