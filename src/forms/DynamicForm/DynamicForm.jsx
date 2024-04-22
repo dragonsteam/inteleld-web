@@ -13,8 +13,6 @@ export default function DynamicForm({ config }) {
   const { panel } = useContext(CrudContext);
 
   const onSubmit = (fieldsValue) => {
-    console.log('field values ::  ', fieldsValue);
-
     dispatch(crud.create({ entity, data: fieldsValue }));
   };
 
