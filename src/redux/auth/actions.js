@@ -17,7 +17,6 @@ export const login =
         current: {
           tokens: data,
         },
-        isLoggedIn: true,
         isLoading: false,
         isSuccess: true,
       };
@@ -30,6 +29,24 @@ export const login =
         payload: {
           data,
         },
+      });
+    }
+  };
+
+export const register =
+  ({ registerData }) =>
+  async (dispatch) => {
+    dispatch({ type: actionTypes.REQUEST_LOADING });
+
+    const success = await authService.register({ registerData });
+
+    if (success) {
+      dispatch({
+        type: actionTypes.REQUEST_SUCCESS,
+      });
+    } else {
+      dispatch({
+        type: actionTypes.REQUEST_FAILED,
       });
     }
   };

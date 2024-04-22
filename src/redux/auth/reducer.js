@@ -1,8 +1,7 @@
 import * as actionTypes from './types';
 
 export const INITIAL_STATE = {
-  current: {},
-  isLoggedIn: false,
+  current: null,
   isLoading: false,
   isSuccess: false,
 };
@@ -12,14 +11,12 @@ const authReducer = (state = INITIAL_STATE, action) => {
     case actionTypes.REQUEST_LOADING:
       return {
         ...state,
-        isLoggedIn: false,
         isLoading: true,
       };
 
     case actionTypes.REQUEST_SUCCESS:
       return {
         current: action.payload,
-        isLoggedIn: true,
         isLoading: false,
         isSuccess: true,
       };

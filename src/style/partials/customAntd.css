@@ -60,6 +60,10 @@
   float: right;
 }
 
+.login-form-msg {
+  float: left;
+}
+
 .login-form-button {
   width: 100%;
 }

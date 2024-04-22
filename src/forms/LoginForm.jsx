@@ -5,7 +5,7 @@ export default function LoginForm() {
   return (
     <div>
       <Form.Item
-        label={'email'}
+        label="Email"
         name="email"
         rules={[
           {
@@ -24,7 +24,7 @@ export default function LoginForm() {
         />
       </Form.Item>
       <Form.Item
-        label={'password'}
+        label="Password"
         name="password"
         rules={[
           {

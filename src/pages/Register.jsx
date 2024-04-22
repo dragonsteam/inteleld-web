@@ -1,31 +1,40 @@
+import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { Button, Form } from 'antd';
 
-import { login } from '@/redux/auth/actions';
+import { register } from '@/redux/auth/actions';
 import { selectAuth } from '@/redux/auth/selector';
-import LoginForm from '@/forms/LoginForm';
+import RegisterForm from '@/forms/RegisterForm';
 import Loading from '@/components/Loading';
 import AuthModule from '@/modules/AuthModule';
 
-const Login = () => {
+export default function Register() {
   const { isLoading, isSuccess } = useSelector(selectAuth);
 
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+
   const onFinish = (values) => {
-    dispatch(login({ loginData: values }));
+    dispatch(register({ registerData: values }));
   };
+
+  useEffect(() => {
+    if (isSuccess) {
+      navigate('/login');
+    }
+  }, [isSuccess]);
 
   const FormContainer = () => {
     return (
       <Loading isLoading={isLoading}>
         <Form
           layout="vertical"
-          name="normal_login"
+          name="normal_register"
           initialValues={{ remember: true }}
           onFinish={onFinish}
         >
-          <LoginForm />
+          <RegisterForm />
 
           <Form.Item>
             <Button
@@ -35,18 +44,16 @@ const Login = () => {
               // loading={isLoading}
               size="large"
             >
-              Log in
+              Register
             </Button>
           </Form.Item>
           <p className="login-form-msg">
-            Or <a href="/register">Register Now!</a>
+            Or <a href="/login">Login with existing Account</a>
           </p>
         </Form>
       </Loading>
     );
   };
 
-  return <AuthModule authContent={<FormContainer />} AUTH_TITLE="Sign in" />;
-};
-
-export default Login;
+  return <AuthModule authContent={<FormContainer />} AUTH_TITLE="Register" />;
+}
