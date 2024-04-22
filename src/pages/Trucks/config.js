@@ -43,6 +43,7 @@ export const fields = {
   },
   eld_device: {
     type: 'string',
+    label: 'ELD Device',
     read_only: true,
   },
 };

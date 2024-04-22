@@ -1,3 +1,4 @@
+import 'leaflet/dist/leaflet.css';
 import './style/app.css';
 
 import { StrictMode, Suspense, lazy } from 'react';

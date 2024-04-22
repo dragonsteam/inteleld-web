@@ -55,7 +55,7 @@ function Sidebar({ collapsible, isMobile = false }) {
     {
       key: 'track',
       icon: <EnvironmentOutlined />,
-      label: <Link to={'/track'}>Tracking</Link>,
+      label: <Link to={'/map'}>World Map</Link>,
     },
     {
       key: 'driver-log',

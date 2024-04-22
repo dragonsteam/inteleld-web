@@ -2,6 +2,7 @@ import { Navigate } from 'react-router-dom';
 
 import Logout from '@/pages/Logout';
 import Dashboard from '@/pages/Dashboard';
+import Map from '@/pages/Map/Map';
 import Drivers from '@/pages/Drivers/Drivers';
 import Trucks from '@/pages/Trucks/Trucks';
 import NotFoundPage from '@/pages/NotFound';
@@ -26,6 +27,7 @@ let routes = {
     },
     //
     { path: '/', element: <Dashboard /> },
+    { path: '/map', element: <Map /> },
     { path: '/drivers', element: <Drivers /> },
     { path: '/trucks', element: <Trucks /> },
 
