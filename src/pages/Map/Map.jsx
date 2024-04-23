@@ -1,5 +1,5 @@
+import { MapContainer, TileLayer } from 'react-leaflet';
 import { Layout } from 'antd';
-import { MapContainer, TileLayer, Marker, useMap } from 'react-leaflet';
 
 export default function Map() {
   return (

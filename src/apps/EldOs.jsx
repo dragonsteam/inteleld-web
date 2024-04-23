@@ -2,7 +2,7 @@
 import { Suspense, lazy } from 'react';
 import { useSelector } from 'react-redux';
 
-import { selectCurrent as selectCurrentAuth } from '@/redux/auth/selector';
+import { selectIsLoggedIn } from '@/redux/auth/selector';
 import AuthRouter from '@/router/AuthRouter';
 import PageLoader from '@/components/PageLoader';
 
@@ -24,8 +24,8 @@ const DefaultApp = () => {
 };
 
 export default function EldOs() {
-  const currentAuth = useSelector(selectCurrentAuth);
+  const isLoggedIn = useSelector(selectIsLoggedIn);
 
-  if (!currentAuth) return <AuthRouter />;
+  if (!isLoggedIn) return <AuthRouter />;
   return <DefaultApp />;
 }

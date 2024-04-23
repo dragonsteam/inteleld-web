@@ -4,7 +4,7 @@ export default function handleError(error) {
   console.log('***error', error);
 
   const { message, response } = error;
-  const { data: resData, status, statusText } = response;
+  const { data: resData, status, statusText } = response || {};
 
   notification.config({
     duration: 15,

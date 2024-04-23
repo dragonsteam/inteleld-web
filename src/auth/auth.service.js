@@ -24,9 +24,12 @@ export const register = async ({ registerData }) => {
   try {
     const response = await axios.post(API_BASE_URL + 'register/', registerData);
 
-    console.log('**response', response);
+    console.log('**auth response', response);
 
-    return true;
+    return {
+      success: true,
+      result: null,
+    };
   } catch (error) {
     return handleError(error);
   }

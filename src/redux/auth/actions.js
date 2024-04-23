@@ -6,12 +6,12 @@ export const login =
   async (dispatch) => {
     dispatch({ type: actionTypes.REQUEST_LOADING });
 
-    const data = await authService.login({ loginData });
+    const resData = await authService.login({ loginData });
 
-    if (data.success) {
+    if (resData.success) {
       const auth_state = {
         current: {
-          tokens: data.result,
+          tokens: resData.result,
         },
         isLoading: false,
         isSuccess: true,
@@ -23,12 +23,17 @@ export const login =
       dispatch({
         type: actionTypes.REQUEST_SUCCESS,
         payload: {
-          data,
+          data: resData.result,
+          errorFields: null,
         },
       });
     } else {
       dispatch({
         type: actionTypes.REQUEST_FAILED,
+        payload: {
+          data: null,
+          errorFields: resData.result,
+        },
       });
     }
   };
@@ -38,15 +43,25 @@ export const register =
   async (dispatch) => {
     dispatch({ type: actionTypes.REQUEST_LOADING });
 
-    const success = await authService.register({ registerData });
+    const resData = await authService.register({ registerData });
 
-    if (success) {
+    console.log('shit***', resData);
+
+    if (resData.success) {
       dispatch({
         type: actionTypes.REQUEST_SUCCESS,
+        payload: {
+          data: resData.result,
+          errorFields: null,
+        },
       });
     } else {
       dispatch({
         type: actionTypes.REQUEST_FAILED,
+        payload: {
+          data: null,
+          errorFields: resData.result,
+        },
       });
     }
   };
