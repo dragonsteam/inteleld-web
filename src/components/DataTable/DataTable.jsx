@@ -68,7 +68,6 @@ export default function DataTable({ config }) {
   const handleRead = (record) => {};
   const handleEdit = (record) => {};
   const handleDelete = (record) => {
-    console.log('handle delete: ', record);
     currentAction.set('delete', record);
     deleteModal.open();
   };
