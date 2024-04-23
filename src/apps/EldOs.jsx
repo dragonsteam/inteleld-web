@@ -8,24 +8,13 @@ import PageLoader from '@/components/PageLoader';
 
 const ErpApp = lazy(() => import('./ErpApp'));
 
-const DefaultApp = () => {
-  return (
-    <Suspense fallback={<PageLoader />}>
-      <ErpApp />
-    </Suspense>
-    // <ChakraProvider theme={theme}>
-    //   <ColorModeScript initialColorMode={theme.config.initialColorMode} />
-    //   <QueryClientProvider client={queryClient}>
-    //     <RouterProvider router={router} />
-    //     <ReactQueryDevtools />
-    //   </QueryClientProvider>
-    // </ChakraProvider>
-  );
-};
-
 export default function EldOs() {
   const isLoggedIn = useSelector(selectIsLoggedIn);
 
   if (!isLoggedIn) return <AuthRouter />;
-  return <DefaultApp />;
+  return (
+    <Suspense fallback={<PageLoader />}>
+      <ErpApp />
+    </Suspense>
+  );
 }

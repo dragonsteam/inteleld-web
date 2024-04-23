@@ -6,10 +6,18 @@ import storePersist, { localStorageHealthCheck } from './storePersist';
 
 localStorageHealthCheck();
 
-const auth_state = storePersist.get('auth') ? storePersist.get('auth') : AUTH_INITIAL_STATE;
+const auth_state = storePersist.get('auth');
 
 const initialState = {
-  auth: auth_state,
+  auth: {
+    current: {
+      data: auth_state ? auth_state.data : null,
+      errorFields: null,
+    },
+    isLoggedIn: auth_state ? true : false,
+    isLoading: false,
+    isSuccess: false,
+  },
 };
 
 const store = configureStore({

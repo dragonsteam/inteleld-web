@@ -10,11 +10,7 @@ export const login =
 
     if (resData.success) {
       const auth_state = {
-        current: {
-          tokens: resData.result,
-        },
-        isLoading: false,
-        isSuccess: true,
+        data: resData.result,
       };
 
       window.localStorage.setItem('auth', JSON.stringify(auth_state));
@@ -45,8 +41,6 @@ export const register =
 
     const resData = await authService.register({ registerData });
 
-    console.log('shit***', resData);
-
     if (resData.success) {
       dispatch({
         type: actionTypes.REQUEST_SUCCESS,
@@ -73,5 +67,5 @@ export const logout = () => async (dispatch) => {
 
   window.localStorage.removeItem('auth');
   window.localStorage.removeItem('settings');
-  window.localStorage.setItem('isLogout', JSON.stringify({ isLogout: true }));
+  // window.localStorage.setItem('isLogout', JSON.stringify({ isLogout: true }));
 };
