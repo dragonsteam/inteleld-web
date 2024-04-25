@@ -3,15 +3,18 @@ export function dataForTable({ fields }) {
 
   Object.keys(fields).forEach((key) => {
     const field = fields[key];
-    const filedLabel = field.label || key;
-    const keyIndex = field.dataIndex || [key];
 
-    const defaultComponent = {
-      title: filedLabel,
-      dataIndex: keyIndex,
-    };
+    if (!field.write_only) {
+      const filedLabel = field.label || key;
+      const keyIndex = field.dataIndex || [key];
 
-    columns.push(defaultComponent);
+      const defaultComponent = {
+        title: filedLabel,
+        dataIndex: keyIndex,
+      };
+
+      columns.push(defaultComponent);
+    }
   });
 
   return columns;

@@ -50,6 +50,8 @@ function FormElement({ field, fieldName, label }) {
   const options = field.options || [];
   const formItemComponent = {
     string: <Input autoComplete="off" />,
+    email: <Input autoComplete="off" />,
+    password: <Input.Password autoComplete="off" />,
     select: (
       <Select showSearch>
         {options.map((option) => {
@@ -63,19 +65,17 @@ function FormElement({ field, fieldName, label }) {
     ),
   };
 
-  // console.log('filed****', <InputComponent />);
-
   return (
     <Form.Item
       label={label}
       name={fieldName}
       rules={[
         {
+          type: field.type || 'string',
           required: field.required || false,
         },
       ]}
     >
-      {/* <Input autoComplete="off" /> */}
       {formItemComponent[field.type]}
     </Form.Item>
   );

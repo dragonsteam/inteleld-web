@@ -1,20 +1,37 @@
 export const fields = {
-  user: {
-    type: 'object',
-    firstname: {
-      type: 'string',
-      required: true,
-    },
-  },
-  lastname: {
+  first_name: {
     type: 'string',
+    label: 'First Name',
     required: true,
+  },
+  last_name: {
+    type: 'string',
+    label: 'Last Name',
+    required: true,
+  },
+  email: {
+    type: 'email',
+    label: 'Email',
+    required: true,
+  },
+  cdl_number: {
+    type: 'string',
+    label: 'CDL Number',
+    required: true,
+  },
+  password: {
+    type: 'password',
+    label: 'Password',
+    required: true,
+    write_only: true,
   },
   co_driver: {
     type: 'string',
+    label: 'Co Driver',
   },
   truck: {
     type: 'string',
+    label: 'Truck',
   },
   // company: {
   //   type: 'search',
@@ -28,16 +45,13 @@ export const fields = {
   //   dataIndex: ['company', 'name'],
   // },
   phone: {
-    type: 'phone',
-  },
-  email: {
-    type: 'email',
+    type: 'string',
+    label: 'Phone',
   },
   app_version: {
     type: 'string',
-  },
-  cdl_number: {
-    type: 'string',
+    label: 'App Version',
+    read_only: true,
   },
   // bio: {
   //   type: 'string',
