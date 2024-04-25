@@ -16,10 +16,6 @@ const CoverLetter = () => {
         This web server/service is currently under development. In case any issues, contact
         azizbek2018arb@gmail.com or nickphilomath@gmail.com.
       </p>
-      <p>
-        Warning: project is not complete yet, so DO NOT SUBMIT ANY PERSONAL INFORMATION! They can be
-        easily stolen by hackers.
-      </p>
     </Layout.Content>
   );
 };

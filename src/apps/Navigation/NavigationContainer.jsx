@@ -53,7 +53,7 @@ function Sidebar({ collapsible, isMobile = false }) {
       label: <Link to={'/'}>Dashboard</Link>,
     },
     {
-      key: 'track',
+      key: 'map',
       icon: <EnvironmentOutlined />,
       label: <Link to={'/map'}>World Map</Link>,
     },
