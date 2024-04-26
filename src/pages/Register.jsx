@@ -4,13 +4,15 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Button, Form } from 'antd';
 
 import { register } from '@/redux/auth/actions';
-import { selectAuth } from '@/redux/auth/selector';
+import { selectAuth, selectErrorFields } from '@/redux/auth/selector';
 import RegisterForm from '@/forms/RegisterForm';
+import ErrorList from '@/forms/ErrorList';
 import Loading from '@/components/Loading';
 import AuthModule from '@/modules/AuthModule';
 
 export default function Register() {
   const { isLoading, isSuccess } = useSelector(selectAuth);
+  const resErrors = useSelector(selectErrorFields);
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -35,6 +37,8 @@ export default function Register() {
           onFinish={onFinish}
         >
           <RegisterForm />
+
+          <ErrorList errors={resErrors || {}} />
 
           <Form.Item>
             <Button

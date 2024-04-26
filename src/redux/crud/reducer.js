@@ -9,7 +9,8 @@ const INITIAL_KEY_STATE = {
 
 const INITIAL_STATE = {
   current: {
-    result: null,
+    data: null,
+    errorFields: null,
   },
   list: {
     result: {
@@ -51,6 +52,7 @@ const crudReducer = (state = INITIAL_STATE, action) => {
     case actionTypes.REQUEST_FAILED:
       return {
         ...state,
+        current: action.payload,
         [keyState]: {
           ...state[keyState],
           isLoading: false,

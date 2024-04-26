@@ -61,7 +61,10 @@ export const crud = {
         dispatch({
           type: actionTypes.REQUEST_FAILED,
           keyState: 'create',
-          payload: null,
+          payload: {
+            data: null,
+            errorFields: resData.result,
+          },
         });
       }
     },

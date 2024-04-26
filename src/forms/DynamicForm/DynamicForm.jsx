@@ -3,9 +3,10 @@ import { Form, Input, Button, Select } from 'antd';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { crud } from '@/redux/crud/actions';
-import { selectCreatedItem } from '@/redux/crud/selector';
+import { selectCreatedItem, selectErrorFields } from '@/redux/crud/selector';
 import Loading from '@/components/Loading';
 import { CrudContext } from '@/context/crud';
+import ErrorList from '../ErrorList';
 
 export default function DynamicForm({ config }) {
   const { fields, entity } = config;
@@ -17,6 +18,7 @@ export default function DynamicForm({ config }) {
   };
 
   const { isLoading, isSuccess } = useSelector(selectCreatedItem);
+  const resErrors = useSelector(selectErrorFields);
 
   useEffect(() => {
     if (isSuccess) {
@@ -36,6 +38,7 @@ export default function DynamicForm({ config }) {
 
           return <FormElement key={index} field={field} fieldName={key} label={fieldLabel} />;
         })}
+        <ErrorList errors={resErrors || {}} />
         <Form.Item>
           <Button type="primary" htmlType="submit">
             Submit
