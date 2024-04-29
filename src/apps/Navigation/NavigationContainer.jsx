@@ -73,6 +73,11 @@ function Sidebar({ collapsible, isMobile = false }) {
       label: <Link to={'/trucks'}>Trucks</Link>,
     },
     {
+      key: 'trailers',
+      icon: <TruckOutlined />,
+      label: <Link to={'/trailers'}>Trailers</Link>,
+    },
+    {
       key: 'company',
       icon: <ShopOutlined />,
       label: <Link to={'/company'}>Companies</Link>,

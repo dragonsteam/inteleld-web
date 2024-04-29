@@ -1,7 +1,6 @@
 import { DATA_SERVICE_NAMES } from '@/config/constants';
 
 export const fields = {
-  // "service_name": "sa",
   name: {
     type: 'string',
     label: 'Name',
