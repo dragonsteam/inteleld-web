@@ -5,6 +5,7 @@ import Dashboard from '@/pages/Dashboard';
 import Map from '@/pages/Map/Map';
 import Drivers from '@/pages/Drivers/Drivers';
 import Trucks from '@/pages/Trucks/Trucks';
+import DataServices from '@/pages/DataServices/DataServices';
 import NotFoundPage from '@/pages/NotFound';
 
 let routes = {
@@ -30,6 +31,7 @@ let routes = {
     { path: '/map', element: <Map /> },
     { path: '/drivers', element: <Drivers /> },
     { path: '/trucks', element: <Trucks /> },
+    { path: '/data-services', element: <DataServices /> },
 
     { path: '*', element: <NotFoundPage /> },
   ],

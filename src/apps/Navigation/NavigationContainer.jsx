@@ -88,9 +88,9 @@ function Sidebar({ collapsible, isMobile = false }) {
       label: <Link to={'/invoice'}>Invoices</Link>,
     },
     {
-      key: 'quote',
+      key: 'data-services',
       icon: <FileSyncOutlined />,
-      label: <Link to={'/quote'}>Proforma Invoices</Link>,
+      label: <Link to={'/data-services'}>Data Services</Link>,
     },
     {
       key: 'payment',
