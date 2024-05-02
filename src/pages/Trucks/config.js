@@ -21,11 +21,13 @@ export const fields = {
   license_number: {
     type: 'string',
     label: 'License Number',
+    hide_on_table: true,
   },
   license_state: {
     type: 'select',
     label: 'License State',
     options: STATES,
+    hide_on_table: true,
   },
   vin_number: {
     type: 'string',
@@ -36,6 +38,7 @@ export const fields = {
     label: 'Fuel Type',
     options: FUEL_TYPES,
     // defaultValue: 'di',
+    hide_on_table: true,
   },
   notes: {
     type: 'string',
@@ -45,5 +48,6 @@ export const fields = {
     type: 'string',
     label: 'ELD Device',
     read_only: true,
+    hide_on_table: true,
   },
 };

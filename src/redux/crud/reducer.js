@@ -27,6 +27,7 @@ const INITIAL_STATE = {
   },
   create: INITIAL_KEY_STATE,
   delete: INITIAL_KEY_STATE,
+  syncData: INITIAL_KEY_STATE,
 };
 
 const crudReducer = (state = INITIAL_STATE, action) => {

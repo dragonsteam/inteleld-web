@@ -41,6 +41,21 @@ const request = {
       return handleError(error);
     }
   },
+  syncData: async ({ entity, id }) => {
+    try {
+      const response = await axios.post(
+        `${entity}/${id}/sync/`,
+        {}, // no data
+        {
+          headers: { ...getAuthHeaders() },
+        }
+      );
+
+      return handleSuccess(response);
+    } catch (error) {
+      return handleError(error);
+    }
+  },
 };
 
 export default request;

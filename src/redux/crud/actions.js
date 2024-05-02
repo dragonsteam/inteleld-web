@@ -99,4 +99,30 @@ export const crud = {
         });
       }
     },
+
+  syncData:
+    ({ entity, id }) =>
+    async (dispatch) => {
+      dispatch({
+        type: actionTypes.REQUEST_LOADING,
+        keyState: 'delete',
+        payload: null,
+      });
+
+      let data = await request.syncData({ entity, id });
+
+      if (data.success) {
+        dispatch({
+          type: actionTypes.REQUEST_SUCCESS,
+          keyState: 'syncData',
+          payload: id,
+        });
+      } else {
+        dispatch({
+          type: actionTypes.REQUEST_FAILED,
+          keyState: 'syncData',
+          payload: null,
+        });
+      }
+    },
 };

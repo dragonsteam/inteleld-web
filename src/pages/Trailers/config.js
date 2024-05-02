@@ -9,4 +9,8 @@ export const fields = {
     label: 'License Plate',
     required: true,
   },
+  notes: {
+    type: 'string',
+    label: 'Notes',
+  },
 };

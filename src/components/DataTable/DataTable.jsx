@@ -34,7 +34,13 @@ function AddNewItem({ config }) {
 }
 
 export default function DataTable({ config }) {
-  const { entity, DATATABLE_TITLE, fields } = config;
+  const {
+    entity,
+    DATATABLE_TITLE,
+    fields,
+    extra_dropdown_items: extra = [],
+    extra_dropdown_handlers: extra_handlers = {},
+  } = config;
   const { currentAction, deleteModal } = useContext(CrudContext);
 
   const dispatch = useDispatch();
@@ -42,11 +48,18 @@ export default function DataTable({ config }) {
   let dataTableColumns = [];
   if (fields) dataTableColumns = [...dataForTable({ fields })];
 
-  // actions in table //
+  // actions in dropdown //
+  const handleView = (record) => {};
+  const handleEdit = (record) => {};
+  const handleDelete = (record) => {
+    currentAction.set('delete', record);
+    deleteModal.open();
+  };
+
   const items = [
     {
       label: 'Show',
-      key: 'read',
+      key: 'view',
       icon: <EyeOutlined />,
     },
     {
@@ -54,7 +67,7 @@ export default function DataTable({ config }) {
       key: 'edit',
       icon: <EditOutlined />,
     },
-    // ...extra,
+    ...extra,
     {
       type: 'divider',
     },
@@ -65,13 +78,22 @@ export default function DataTable({ config }) {
       icon: <DeleteOutlined />,
     },
   ];
-  const handleRead = (record) => {};
-  const handleEdit = (record) => {};
-  const handleDelete = (record) => {
-    currentAction.set('delete', record);
-    deleteModal.open();
+
+  // prepare dropdown handlers
+  const dropdownHandlers = {
+    view: handleView,
+    edit: handleEdit,
+    delete: handleDelete,
   };
-  const handleUpdatePassword = (record) => {};
+  // add extra handlers
+  for (const key of Object.keys(extra_handlers)) dropdownHandlers[key] = extra_handlers[key];
+
+  const onDropdownClick = ({ key, record }) => {
+    const handler = dropdownHandlers[key];
+    if (handler) handler(record);
+    else console.log('!!! handler not found !!!', dropdownHandlers);
+  };
+
   dataTableColumns = [
     ...dataTableColumns,
     {
@@ -82,27 +104,7 @@ export default function DataTable({ config }) {
         <Dropdown
           menu={{
             items,
-            onClick: ({ key }) => {
-              switch (key) {
-                case 'read':
-                  handleRead(record);
-                  break;
-                case 'edit':
-                  handleEdit(record);
-                  break;
-
-                case 'delete':
-                  handleDelete(record);
-                  break;
-                case 'updatePassword':
-                  handleUpdatePassword(record);
-                  break;
-
-                default:
-                  break;
-              }
-              // else if (key === '2')handleCloseTask
-            },
+            onClick: ({ key }) => onDropdownClick({ key, record }),
           }}
           trigger={['click']}
         >
