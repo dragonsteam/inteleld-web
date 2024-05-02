@@ -119,7 +119,12 @@ export default function DataTable({ config }) {
   ///////
 
   const { result: listResult, isLoading: listIsLoading } = useSelector(selectListItems);
-  const { items: dataSource } = listResult;
+  const { items: dataSource, pagination } = listResult;
+
+  const handleDataTableLoad = (pagination) => {
+    const options = { page: pagination.current || 1, items: pagination.pageSize || 10 };
+    dispatch(crud.list({ entity, options }));
+  };
 
   useEffect(() => {
     const controller = new AbortController();
@@ -145,6 +150,8 @@ export default function DataTable({ config }) {
         columns={dataTableColumns}
         rowKey={(item) => item.id}
         dataSource={dataSource}
+        pagination={{ ...pagination, showSizeChanger: false }}
+        onChange={handleDataTableLoad}
         loading={listIsLoading}
         scroll={{ x: true }}
       />

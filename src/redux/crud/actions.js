@@ -24,7 +24,11 @@ export const crud = {
       if (data.success) {
         const result = {
           items: data.result.results || [],
-          pagination: null,
+          pagination: {
+            current: options.page,
+            pageSize: options.items,
+            total: data.result.count || options.items,
+          },
         };
         dispatch({
           type: actionTypes.REQUEST_SUCCESS,

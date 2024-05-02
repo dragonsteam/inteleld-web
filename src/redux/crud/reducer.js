@@ -16,10 +16,9 @@ const INITIAL_STATE = {
     result: {
       items: [],
       pagination: {
-        // current: 1,
+        current: 1,
         pageSize: 10,
         total: 1,
-        showSizeChanger: false,
       },
     },
     isLoading: false,

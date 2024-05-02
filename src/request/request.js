@@ -8,9 +8,9 @@ import handleError from './handleError';
 axios.defaults.baseURL = API_BASE_URL;
 
 const request = {
-  list: async ({ entity, options = {} }) => {
+  list: async ({ entity, options = { page: 1, items: 10 } }) => {
     try {
-      const response = await axios.get(entity + '/', {
+      const response = await axios.get(`${entity}/?page=${options.page}`, {
         headers: { ...getAuthHeaders() },
       });
 
