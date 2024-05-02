@@ -17,6 +17,7 @@ export default function SidePanel({ config }) {
         panel.close();
       }}
       open={panel.isOpen}
+      width={450}
     >
       <DynamicForm config={config} />
     </Drawer>

@@ -1,8 +1,6 @@
-import { Form } from 'antd';
-
 export default function ErrorList({ errors }) {
   return (
-    <Form.Item>
+    <>
       {Object.keys(errors).map((key) => {
         return (
           <div key={key}>
@@ -15,6 +13,6 @@ export default function ErrorList({ errors }) {
           </div>
         );
       })}
-    </Form.Item>
+    </>
   );
 }

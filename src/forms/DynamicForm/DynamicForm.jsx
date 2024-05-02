@@ -38,11 +38,13 @@ export default function DynamicForm({ config }) {
 
           return <FormElement key={index} field={field} fieldName={key} label={fieldLabel} />;
         })}
-        <ErrorList errors={resErrors || {}} />
         <Form.Item>
           <Button type="primary" htmlType="submit">
             Submit
           </Button>
+        </Form.Item>
+        <Form.Item>
+          <ErrorList errors={resErrors || {}} />
         </Form.Item>
       </Form>
     </Loading>
