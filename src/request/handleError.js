@@ -8,7 +8,6 @@ export default function handleError(error) {
 
   notification.config({
     duration: 15,
-    maxCount: 1,
   });
 
   if (!navigator.onLine) {
