@@ -32,6 +32,8 @@ const INITIAL_STATE = {
 const crudReducer = (state = INITIAL_STATE, action) => {
   const { payload, keyState } = action;
   switch (action.type) {
+    case actionTypes.RESET_STATE:
+      return INITIAL_STATE;
     case actionTypes.REQUEST_LOADING:
       return {
         ...state,

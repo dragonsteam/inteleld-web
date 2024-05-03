@@ -32,6 +32,13 @@ function CrudContextProvider({ children }) {
     set: (type, entity) => setCurrAction({ type, entity }),
   };
 
+  // reset
+  const resetAction = () => {
+    setSidePanelOpen(false);
+    setIsModalOpen(false);
+    setCurrAction({ type: undefined, entity: undefined });
+  };
+
   return (
     <CrudContext.Provider value={{ panel, deleteModal, currentAction }}>
       {children}
