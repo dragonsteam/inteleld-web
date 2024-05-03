@@ -1,4 +1,5 @@
 import CrudModule from '@/modules/CrudModule/CrudModule';
+import DynamicForm from '@/forms/DynamicForm/DynamicForm';
 import { fields } from './config';
 
 export default function Trailers() {
@@ -11,5 +12,5 @@ export default function Trailers() {
     fields,
   };
 
-  return <CrudModule config={config} />;
+  return <CrudModule config={config} createForm={<DynamicForm fields={fields} />} />;
 }

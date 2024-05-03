@@ -1,8 +1,9 @@
 import { useDispatch } from 'react-redux';
-import CrudModule from '@/modules/CrudModule/CrudModule';
 import { CopyOutlined } from '@ant-design/icons';
 
+import CrudModule from '@/modules/CrudModule/CrudModule';
 import { crud } from '@/redux/crud/actions';
+import DynamicForm from '@/forms/DynamicForm/DynamicForm';
 import { fields } from './config';
 
 export default function DataServices() {
@@ -21,6 +22,8 @@ export default function DataServices() {
 
   const extra_dropdown_handlers = { sync: handleSyncData };
 
+  ////
+
   const config = {
     PANEL_TITLE: 'Data Services',
     DATATABLE_TITLE: 'Data Service List',
@@ -32,5 +35,5 @@ export default function DataServices() {
     extra_dropdown_handlers,
   };
 
-  return <CrudModule config={config} />;
+  return <CrudModule config={config} createForm={<DynamicForm fields={fields} />} />;
 }

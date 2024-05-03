@@ -2,9 +2,8 @@ import { useContext } from 'react';
 import { Drawer } from 'antd';
 
 import { CrudContext } from '@/context/crud';
-import DynamicForm from '@/forms/DynamicForm/DynamicForm';
 
-export default function SidePanel({ config }) {
+export default function SidePanel({ config, topContent, bottomContent }) {
   const { panel } = useContext(CrudContext);
 
   const { PANEL_TITLE } = config;
@@ -19,7 +18,8 @@ export default function SidePanel({ config }) {
       open={panel.isOpen}
       width={450}
     >
-      <DynamicForm config={config} />
+      {topContent}
+      {bottomContent}
     </Drawer>
   );
 }

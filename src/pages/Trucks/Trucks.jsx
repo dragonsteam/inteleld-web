@@ -1,5 +1,5 @@
 import CrudModule from '@/modules/CrudModule/CrudModule';
-// import DynamicForm from '@/forms/DynamicForm';
+import DynamicForm from '@/forms/DynamicForm/DynamicForm';
 import { fields } from './config';
 
 export default function Drivers() {
@@ -19,9 +19,9 @@ export default function Drivers() {
 
   return (
     <CrudModule
-      // createForm={<DynamicForm fields={fields} />}
-      // updateForm={<DynamicForm fields={fields} />}
       config={config}
+      createForm={<DynamicForm fields={fields} />}
+      // updateForm={<DynamicForm fields={fields} />}
     />
   );
 }

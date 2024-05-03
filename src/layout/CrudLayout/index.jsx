@@ -24,17 +24,20 @@ const ContentBox = ({ children }) => {
   );
 };
 
-export default function CrudLayout({ children, config }) {
+export default function CrudLayout({
+  children,
+  config,
+  sidePanelTopContent,
+  sidePanelBottomContent,
+}) {
   return (
     <>
       <CrudContextProvider>
-        {/* <SidePanel
+        <SidePanel
           config={config}
           topContent={sidePanelTopContent}
           bottomContent={sidePanelBottomContent}
-          fixHeaderPanel={fixHeaderPanel}
-        ></SidePanel> */}
-        <SidePanel config={config} />
+        />
 
         <ContentBox> {children}</ContentBox>
       </CrudContextProvider>
