@@ -1,15 +1,13 @@
 # docker run -it oeliks-web
 
-version: "3.8"
+version: '3.8'
 
 services:
   web:
-    container_name: inteleld-web
-    image: ghcr.io/dragonsteam/inteleld-web:latest
     build: .
-    command: npm run build
-
-    # volumes:
-    #   - dist:/app/dist
-# volumes:
-#   dist:
+    command: npm run dev
+    ports:
+      - 3000:3000
+    volumes:
+      - .:/app
+      - /app/node_modules
