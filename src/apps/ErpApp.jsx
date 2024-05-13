@@ -16,11 +16,11 @@ export default function ErpApp() {
           <HeaderContent />
           <Content
             style={{
-              margin: '40px auto 30px',
+              margin: '5px auto 30px',
               overflow: 'initial',
               width: '100%',
               padding: '0 50px',
-              maxWidth: 1400,
+              // maxWidth: 1400,
             }}
           >
             <AppRouter />

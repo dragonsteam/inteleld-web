@@ -1,5 +1,5 @@
 import { MapContainer, TileLayer, Polyline } from 'react-leaflet';
-import { Layout } from 'antd';
+import { Layout, Drawer } from 'antd';
 
 const data = [
   {
@@ -906,6 +906,10 @@ export default function Map() {
     return polyline;
   };
 
+  const sidePanelConfig = {
+    PANEL_TITLE: 'All Units',
+  };
+
   return (
     <Layout.Content
       className="whiteBox shadow"
@@ -916,6 +920,7 @@ export default function Map() {
         flex: 'none',
       }}
     >
+      {/* MAP */}
       <div style={{ width: '100%', aspectRatio: '16/9' }}>
         <MapContainer center={[40, -100]} zoom={5}>
           <TileLayer attribution="none" url="https://tile.openstreetmap.org/{z}/{x}/{y}.png" />
@@ -925,6 +930,9 @@ export default function Map() {
           <Polyline pathOptions={{ color: '#0377fc' }} positions={getRoutePolyline()} />
         </MapContainer>
       </div>
+
+      {/* SIDE PANEL */}
+      {/*  */}
     </Layout.Content>
   );
 }
