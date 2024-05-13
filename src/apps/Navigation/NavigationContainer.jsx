@@ -60,32 +60,42 @@ function Sidebar({ collapsible, isMobile = false }) {
     {
       key: 'driver-log',
       icon: <FileOutlined />,
-      label: <Link to={'/driver-log'}>Driver Logs</Link>,
+      label: <Link to={'/driver-log'}>ELD Logs</Link>,
     },
     {
-      key: 'drivers',
+      key: 'vehicles',
+      icon: <TruckOutlined />,
+      label: 'Vehicles',
+      children: [
+        {
+          key: 'trucks',
+          label: <Link to={'/trucks'}>Trucks</Link>,
+        },
+        {
+          key: 'trailers',
+          label: <Link to={'/trailers'}>Trailers</Link>,
+        },
+      ],
+    },
+    {
+      key: 'employee',
       icon: <UserOutlined />,
-      label: <Link to={'/drivers'}>Drivers</Link>,
-    },
-    {
-      key: 'trucks',
-      icon: <TruckOutlined />,
-      label: <Link to={'/trucks'}>Trucks</Link>,
-    },
-    {
-      key: 'trailers',
-      icon: <TruckOutlined />,
-      label: <Link to={'/trailers'}>Trailers</Link>,
+      label: 'Employee',
+      children: [
+        {
+          key: 'drivers',
+          label: <Link to={'/drivers'}>Drivers</Link>,
+        },
+        {
+          key: 'users',
+          label: <Link to={'/users'}>Users</Link>,
+        },
+      ],
     },
     {
       key: 'company',
       icon: <ShopOutlined />,
       label: <Link to={'/company'}>Companies</Link>,
-    },
-    {
-      key: 'lead',
-      icon: <FilterOutlined />,
-      label: <Link to={'/lead'}>Leads</Link>,
     },
     {
       key: 'invoice',
@@ -103,15 +113,9 @@ function Sidebar({ collapsible, isMobile = false }) {
       label: <Link to={'/payment'}>Payments</Link>,
     },
     {
-      key: 'employee',
-      icon: <UserOutlined />,
-      label: <Link to={'/employee'}>Employee</Link>,
-    },
-
-    {
-      label: 'Settings',
       key: 'settings',
       icon: <SettingOutlined />,
+      label: 'Settings',
       children: [
         {
           key: 'admin',
