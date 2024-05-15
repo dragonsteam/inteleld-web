@@ -26,7 +26,7 @@ export const crud = {
         payload: null,
       });
 
-      let data = await request.list({ entity, options });
+      let data = await request.list({ url: `${entity}`, pagination: options });
 
       if (data.success) {
         const result = {

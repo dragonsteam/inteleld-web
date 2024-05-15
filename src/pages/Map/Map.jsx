@@ -1,10 +1,21 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { MapContainer, TileLayer, Polyline } from 'react-leaflet';
 import { Layout, Button, Flex } from 'antd';
 import { LeftOutlined, RightOutlined } from '@ant-design/icons';
 
+import { map } from '@/redux/map/actions';
+import { selectSidePanelOpen } from '@/redux/map/selector';
+import SidePanel from './SidePanel';
+
 export default function Map() {
-  const [isSideOpen, setIsSideOpen] = useState(false);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(map.listTrucks());
+  }, []);
+
+  const isSidePanelOpen = useSelector(selectSidePanelOpen);
 
   const getRoutePolyline = () => {
     const polyline = [].map((point) => [point.latitude, point.longitude]);
@@ -21,12 +32,13 @@ export default function Map() {
       style={{
         margin: '30px auto',
         width: '100%',
+        height: '100%',
         maxWidth: '100%',
         flex: 'none',
       }}
     >
       {/* MAP */}
-      <div style={{ width: '100%', aspectRatio: '16/9' }}>
+      <div style={{ width: '100%', height: '100%' }}>
         <MapContainer center={[40, -100]} zoom={5}>
           <TileLayer attribution="none" url="https://tile.openstreetmap.org/{z}/{x}/{y}.png" />
           {/* <Marker position={[40.505, -100.09]}>
@@ -36,28 +48,14 @@ export default function Map() {
         </MapContainer>
       </div>
 
-      {/* SIDE */}
-      {isSideOpen && (
-        <div className="map-side shadow">
-          <Flex justify="space-between" align="center" style={{ padding: '0 20px' }}>
-            <h3>All Units List</h3>
-            <Button
-              shape="circle"
-              icon={<LeftOutlined />}
-              onClick={() => {
-                setIsSideOpen(false);
-              }}
-            ></Button>
-          </Flex>
-        </div>
-      )}
+      {isSidePanelOpen && <SidePanel />}
 
       <Button
         className="open-list-btn shadow"
         icon={<RightOutlined />}
         // iconPosition="end"
         onClick={() => {
-          setIsSideOpen(true);
+          dispatch(map.sidePanel('open'));
         }}
       >
         Show List
