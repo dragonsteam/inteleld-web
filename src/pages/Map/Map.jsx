@@ -1,12 +1,20 @@
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { MapContainer, TileLayer, Polyline } from 'react-leaflet';
 import { Layout, Button, Flex } from 'antd';
 import { LeftOutlined, RightOutlined } from '@ant-design/icons';
+import { MapContainer, TileLayer, Polyline, Marker, Popup } from 'react-leaflet';
+import { Icon } from 'leaflet';
 
 import { map } from '@/redux/map/actions';
-import { selectSidePanelOpen } from '@/redux/map/selector';
+import { selectSidePanelOpen, selectTrucksList } from '@/redux/map/selector';
 import SidePanel from './SidePanel';
+
+import record_image from '@/assets/record.png';
+
+const RecordIcon = new Icon({
+  iconUrl: record_image,
+  iconSize: [26, 26],
+});
 
 export default function Map() {
   const dispatch = useDispatch();
@@ -15,6 +23,7 @@ export default function Map() {
     dispatch(map.listTrucks());
   }, []);
 
+  const trucksList = useSelector(selectTrucksList);
   const isSidePanelOpen = useSelector(selectSidePanelOpen);
 
   const getRoutePolyline = () => {
@@ -41,10 +50,16 @@ export default function Map() {
       <div style={{ width: '100%', height: '100%' }}>
         <MapContainer center={[40, -100]} zoom={5}>
           <TileLayer attribution="none" url="https://tile.openstreetmap.org/{z}/{x}/{y}.png" />
-          {/* <Marker position={[40.505, -100.09]}>
-          <Popup>I am a pop-up!</Popup>
-        </Marker> */}
-          <Polyline pathOptions={{ color: '#0377fc' }} positions={getRoutePolyline()} />
+          {trucksList.map((truck) => {
+            const { latest_trackpoint: point } = truck;
+            if (point)
+              return (
+                <Marker position={[point.latitude, point.longitude]} icon={RecordIcon}></Marker>
+              );
+            return;
+          })}
+
+          {/* <Polyline pathOptions={{ color: '#0377fc' }} positions={getRoutePolyline()} /> */}
         </MapContainer>
       </div>
 
