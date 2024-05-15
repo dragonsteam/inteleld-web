@@ -7,7 +7,7 @@ export default function NotFound({ entity = '' }) {
   return (
     <Result
       status="404"
-      title={'error_404'}
+      title={'404 Not Found'}
       subTitle={'Sorry the Page you requested does not exist'}
       extra={
         <Button
@@ -16,7 +16,7 @@ export default function NotFound({ entity = '' }) {
             navigate('/');
           }}
         >
-          {'Back'}
+          Back
         </Button>
       }
     />

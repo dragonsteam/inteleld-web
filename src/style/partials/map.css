@@ -1,0 +1,25 @@
+.leaflet-container {
+  height: 100%;
+}
+
+.map {
+  position: relative;
+}
+
+.map-side {
+  width: 300px;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  z-index: 1000;
+  background: #fff;
+  transition: all 0.3s ease-in-out;
+}
+
+.map .open-list-btn {
+  position: absolute;
+  top: 0;
+  margin-left: 70px;
+  margin-top: 10px;
+  z-index: 999;
+}

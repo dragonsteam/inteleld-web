@@ -1,7 +1,7 @@
 export const fields = {
   name: {
     type: 'string',
-    label: 'Name',
+    label: 'Number', // Name
     required: true,
   },
   license_plate: {
