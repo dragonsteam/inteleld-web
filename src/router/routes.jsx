@@ -3,6 +3,7 @@ import { Navigate } from 'react-router-dom';
 import Logout from '@/pages/Logout';
 import Dashboard from '@/pages/Dashboard';
 import Map from '@/pages/Map/Map';
+import Users from '@/pages/Users/Users';
 import Drivers from '@/pages/Drivers/Drivers';
 import Trucks from '@/pages/Trucks/Trucks';
 import Trailers from '@/pages/Trailers/Trailers';
@@ -30,6 +31,7 @@ let routes = {
     //
     { path: '/', element: <Dashboard /> },
     { path: '/map', element: <Map /> },
+    { path: '/users', element: <Users /> },
     { path: '/drivers', element: <Drivers /> },
     { path: '/trucks', element: <Trucks /> },
     { path: '/trailers', element: <Trailers /> },

@@ -37,7 +37,7 @@ export default function Map() {
 
   return (
     <Layout.Content
-      className="whiteBox shadow map"
+      className="map whiteBox shadow"
       style={{
         margin: '30px auto',
         width: '100%',

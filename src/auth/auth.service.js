@@ -5,7 +5,7 @@ import { BASE_URL, API_BASE_URL } from '@/config/serverApiConfig';
 
 export const login = async ({ loginData }) => {
   try {
-    const response = await axios.post(BASE_URL + 'auth/jwt/create', loginData);
+    const response = await axios.post(BASE_URL + 'api/auth/jwt/create', loginData);
 
     console.log('**auth response', response);
 
