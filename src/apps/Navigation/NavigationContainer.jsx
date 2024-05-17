@@ -16,6 +16,7 @@ import {
   CreditCardOutlined,
   MenuOutlined,
   FileOutlined,
+  CalendarOutlined,
   ShopOutlined,
   FilterOutlined,
   TruckOutlined,
@@ -58,10 +59,15 @@ function Sidebar({ collapsible, isMobile = false }) {
       label: <Link to={'/map'}>World Map</Link>,
     },
     {
-      key: 'driver-log',
-      icon: <FileOutlined />,
-      label: <Link to={'/driver-log'}>ELD Logs</Link>,
+      key: 'board',
+      icon: <CalendarOutlined />,
+      label: <Link to={'/board'}>Dispatch Board</Link>,
     },
+    // {
+    //   key: 'driver-log',
+    //   icon: <FileOutlined />,
+    //   label: <Link to={'/driver-log'}>ELD Logs</Link>,
+    // },
     {
       key: 'vehicles',
       icon: <TruckOutlined />,
@@ -118,21 +124,12 @@ function Sidebar({ collapsible, isMobile = false }) {
       label: 'Settings',
       children: [
         {
-          key: 'admin',
-          // icon: <TeamOutlined />,
-          label: <Link to={'/admin'}>Admin</Link>,
+          key: 'settings',
+          label: <Link to={'/settings'}>App Settings</Link>,
         },
         {
-          key: 'generalSettings',
-          label: <Link to={'/settings'}>Settings</Link>,
-        },
-        {
-          key: 'paymentMode',
-          label: <Link to={'/payment/mode'}>Payment Mode</Link>,
-        },
-        {
-          key: 'taxes',
-          label: <Link to={'/taxes'}>Taxes</Link>,
+          key: 'profile',
+          label: <Link to={'/profile'}>Profile Settings</Link>,
         },
         {
           key: 'about',

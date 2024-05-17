@@ -7,12 +7,12 @@ export default function HeaderContent() {
     {
       icon: <UserOutlined />,
       key: 'settingProfile',
-      label: <Link to={'/profile'}>Profile Settings</Link>,
+      label: <Link to={'/profile'}>Profile</Link>,
     },
     {
       icon: <ToolOutlined />,
       key: 'settingApp',
-      label: <Link to={'/settings'}>App Settings</Link>,
+      label: <Link to={'/settings'}>Settings</Link>,
     },
     {
       type: 'divider',
