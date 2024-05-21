@@ -1,9 +1,9 @@
 import { STATES } from '@/config/constants';
 
 const CUSTOMER_TYPES = [
-  { value: 1, label: 'Broker' },
-  { value: 2, label: 'Carrier' },
-  { value: 3, label: 'Shipper' },
+  { value: 1, label: 'Broker', color: 'magenta' },
+  { value: 2, label: 'Carrier', color: 'lime' },
+  { value: 3, label: 'Shipper', color: 'blue' },
 ];
 
 export const fields = {
@@ -20,6 +20,7 @@ export const fields = {
     type: 'select',
     label: 'Customer type',
     options: CUSTOMER_TYPES,
+    renderAsTag: true,
   },
   website: {
     type: 'url',

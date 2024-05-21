@@ -34,6 +34,8 @@ function AddNewItem({ config }) {
 }
 
 export default function DataTable({ config }) {
+  const dispatch = useDispatch();
+
   const {
     entity,
     DATATABLE_TITLE,
@@ -42,11 +44,6 @@ export default function DataTable({ config }) {
     extra_dropdown_handlers: extra_handlers = {},
   } = config;
   const { currentAction, deleteModal } = useContext(CrudContext);
-
-  const dispatch = useDispatch();
-
-  let dataTableColumns = [];
-  if (fields) dataTableColumns = [...dataForTable({ fields })];
 
   // actions in dropdown //
   const handleView = (record) => {};
@@ -94,8 +91,11 @@ export default function DataTable({ config }) {
     else console.log('!!! handler not found !!!', dropdownHandlers);
   };
 
-  dataTableColumns = [
-    ...dataTableColumns,
+  let dispatchColumns = [];
+  if (fields) dispatchColumns = [...dataForTable({ fields })];
+
+  let dataTableColumns = [
+    ...dispatchColumns,
     {
       title: '',
       key: 'action',
@@ -141,10 +141,15 @@ export default function DataTable({ config }) {
         backIcon={<ArrowLeftOutlined />}
         title={DATATABLE_TITLE}
         ghost={false}
+        extra={[
+          <Button onClick={handleDataTableLoad} key="refresh-btn" icon={<RedoOutlined />}>
+            Refresh
+          </Button>,
+          <AddNewItem key="add-btn" config={config} />,
+        ]}
         style={{
           padding: '20px 0px',
         }}
-        extra={[<AddNewItem key="add-btn" config={config} />]}
       ></PageHeader>
       <Table
         columns={dataTableColumns}
