@@ -69,6 +69,11 @@ function Sidebar({ collapsible, isMobile = false }) {
     //   label: <Link to={'/driver-log'}>ELD Logs</Link>,
     // },
     {
+      key: 'customers',
+      icon: <ShopOutlined />,
+      label: <Link to={'/customers'}>Customers</Link>,
+    },
+    {
       key: 'vehicles',
       icon: <TruckOutlined />,
       label: 'Vehicles',
@@ -97,11 +102,6 @@ function Sidebar({ collapsible, isMobile = false }) {
           label: <Link to={'/users'}>Users</Link>,
         },
       ],
-    },
-    {
-      key: 'company',
-      icon: <ShopOutlined />,
-      label: <Link to={'/company'}>Companies</Link>,
     },
     {
       key: 'invoice',

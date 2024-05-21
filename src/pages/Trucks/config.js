@@ -1,4 +1,18 @@
-import { STATES, FUEL_TYPES } from '@/config/constants';
+import { STATES } from '@/config/constants';
+
+const FUEL_TYPES = [
+  { value: 1, name: 'Diesel' },
+  { value: 2, name: 'Gasoline' },
+  { value: 3, name: 'Propane' },
+  { value: 4, name: 'Liquid Natural Gas' },
+  { value: 5, name: 'Compressed Natural Gas' },
+  { value: 6, name: 'Methanol' },
+  { value: 7, name: 'E-85' },
+  { value: 8, name: 'M-85' },
+  { value: 9, name: 'A55' },
+  { value: 10, name: 'Biodisel' },
+  { value: 11, name: 'Other' },
+];
 
 export const fields = {
   unit_number: {
