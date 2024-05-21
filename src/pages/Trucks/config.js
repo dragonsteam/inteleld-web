@@ -1,17 +1,17 @@
 import { STATES } from '@/config/constants';
 
 const FUEL_TYPES = [
-  { value: 1, name: 'Diesel' },
-  { value: 2, name: 'Gasoline' },
-  { value: 3, name: 'Propane' },
-  { value: 4, name: 'Liquid Natural Gas' },
-  { value: 5, name: 'Compressed Natural Gas' },
-  { value: 6, name: 'Methanol' },
-  { value: 7, name: 'E-85' },
-  { value: 8, name: 'M-85' },
-  { value: 9, name: 'A55' },
-  { value: 10, name: 'Biodisel' },
-  { value: 11, name: 'Other' },
+  { value: 1, label: 'Diesel' },
+  { value: 2, label: 'Gasoline' },
+  { value: 3, label: 'Propane' },
+  { value: 4, label: 'Liquid Natural Gas' },
+  { value: 5, label: 'Compressed Natural Gas' },
+  { value: 6, label: 'Methanol' },
+  { value: 7, label: 'E-85' },
+  { value: 8, label: 'M-85' },
+  { value: 9, label: 'A55' },
+  { value: 10, label: 'Biodisel' },
+  { value: 11, label: 'Other' },
 ];
 
 export const fields = {
@@ -29,7 +29,7 @@ export const fields = {
     label: 'Model',
   },
   year: {
-    type: 'string',
+    type: 'number',
     label: 'Year',
   },
   license_number: {
@@ -55,7 +55,7 @@ export const fields = {
     hide_on_table: true,
   },
   notes: {
-    type: 'string',
+    type: 'textarea',
     label: 'Notes',
   },
   eld_device: {

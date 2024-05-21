@@ -1,9 +1,9 @@
 import { STATES } from '@/config/constants';
 
 const CUSTOMER_TYPES = [
-  { value: 1, name: 'Broker' },
-  { value: 2, name: 'Carrier' },
-  { value: 3, name: 'Shipper' },
+  { value: 1, label: 'Broker' },
+  { value: 2, label: 'Carrier' },
+  { value: 3, label: 'Shipper' },
 ];
 
 export const fields = {

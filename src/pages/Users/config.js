@@ -1,14 +1,14 @@
 export const USER_ROLES = [
-  { value: 1, name: 'Company Owner' },
-  { value: 2, name: 'Company Admin' },
-  { value: 3, name: 'Dispatcher' },
-  { value: 4, name: 'Updater' },
-  { value: 5, name: 'Accountant' },
-  { value: 6, name: 'Safety Manager' },
-  { value: 7, name: 'Fleet Manager' },
-  { value: 8, name: 'HR Manager' },
-  { value: 9, name: 'ELD Operator' },
-  { value: 10, name: 'Guest' },
+  { value: 1, label: 'Company Owner' },
+  { value: 2, label: 'Company Admin' },
+  { value: 3, label: 'Dispatcher' },
+  { value: 4, label: 'Updater' },
+  { value: 5, label: 'Accountant' },
+  { value: 6, label: 'Safety Manager' },
+  { value: 7, label: 'Fleet Manager' },
+  { value: 8, label: 'HR Manager' },
+  { value: 9, label: 'ELD Operator' },
+  { value: 10, label: 'Guest' },
 ];
 
 export const fields = {
