@@ -10,7 +10,7 @@ export const fields = {
     required: true,
   },
   notes: {
-    type: 'string',
+    type: 'textarea',
     label: 'Notes',
   },
 };

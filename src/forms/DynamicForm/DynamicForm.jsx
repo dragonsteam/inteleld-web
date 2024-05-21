@@ -56,7 +56,7 @@ function FormElement({ field }) {
     string: (
       <Input autoComplete="off" maxLength={field.maxLength} defaultValue={field.defaultValue} />
     ),
-    url: <Input addonBefore="http://" autoComplete="off" placeholder="www.example.com" />,
+    url: <Input autoComplete="off" placeholder="https://www.example.com" />,
     textarea: <Input.TextArea rows={4} />,
     email: <Input autoComplete="off" placeholder="email@example.com" />,
     number: <InputNumber style={{ width: '100%' }} />,
@@ -65,7 +65,7 @@ function FormElement({ field }) {
       <Switch
         checkedChildren={<CheckOutlined />}
         unCheckedChildren={<CloseOutlined />}
-        defaultValue={true}
+        defaultValue={field.defaultValue || false}
       />
     ),
     // date: (

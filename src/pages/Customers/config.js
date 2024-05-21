@@ -45,5 +45,6 @@ export const fields = {
   is_fmcsa_verified: {
     type: 'boolean',
     label: 'FMCSA verified',
+    defaultValue: false,
   },
 };

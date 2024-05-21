@@ -119,7 +119,7 @@ function Sidebar({ collapsible, isMobile = false }) {
       label: <Link to={'/payment'}>Payments</Link>,
     },
     {
-      key: 'settings',
+      key: 'settings-section',
       icon: <SettingOutlined />,
       label: 'Settings',
       children: [
