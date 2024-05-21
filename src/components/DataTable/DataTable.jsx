@@ -15,11 +15,12 @@ import {
 import { dataForTable } from '@/utils/dataStructure';
 import { crud } from '@/redux/crud/actions';
 import { selectListItems } from '@/redux/crud/selector';
-import { CrudContext } from '@/context/crud';
+import { useCrudContext } from '@/context/crud';
 
 function AddNewItem({ config }) {
+  const { crudContextAction } = useCrudContext();
+  const { panel } = crudContextAction;
   const { ADD_NEW_ENTITY } = config;
-  const { panel } = useContext(CrudContext);
 
   return (
     <Button
@@ -43,15 +44,8 @@ export default function DataTable({ config }) {
     extra_dropdown_items: extra = [],
     extra_dropdown_handlers: extra_handlers = {},
   } = config;
-  const { currentAction, deleteModal } = useContext(CrudContext);
-
-  // actions in dropdown //
-  const handleView = (record) => {};
-  const handleEdit = (record) => {};
-  const handleDelete = (record) => {
-    currentAction.set('delete', record);
-    deleteModal.open();
-  };
+  const { crudContextAction } = useCrudContext();
+  const { modal, panel } = crudContextAction;
 
   const items = [
     {
@@ -75,6 +69,14 @@ export default function DataTable({ config }) {
       icon: <DeleteOutlined />,
     },
   ];
+
+  // actions in dropdown //
+  const handleView = (record) => {};
+  const handleEdit = (record) => {};
+  const handleDelete = (record) => {
+    dispatch(crud.currentAction({ actionType: 'delete', data: record }));
+    modal.open();
+  };
 
   // prepare dropdown handlers
   const dropdownHandlers = {

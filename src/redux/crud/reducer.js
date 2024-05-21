@@ -61,6 +61,21 @@ const crudReducer = (state = INITIAL_STATE, action) => {
           isSuccess: false,
         },
       };
+    case actionTypes.CURRENT_ACTION:
+      return {
+        ...state,
+        [keyState]: {
+          ...INITIAL_KEY_STATE,
+          current: payload,
+        },
+      };
+    case actionTypes.RESET_ACTION:
+      return {
+        ...state,
+        [keyState]: {
+          ...INITIAL_STATE[keyState],
+        },
+      };
 
     default:
       return state;

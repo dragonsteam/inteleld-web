@@ -2,7 +2,7 @@ import { STATES } from '@/config/constants';
 
 const CUSTOMER_TYPES = [
   { value: 1, label: 'Broker', color: 'magenta' },
-  { value: 2, label: 'Carrier', color: 'lime' },
+  { value: 2, label: 'Carrier', color: 'green' },
   { value: 3, label: 'Shipper', color: 'blue' },
 ];
 
@@ -38,6 +38,7 @@ export const fields = {
     type: 'select',
     label: 'State',
     options: STATES,
+    renderAsTag: true,
   },
   postal_code: {
     type: 'string',

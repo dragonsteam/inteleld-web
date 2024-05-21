@@ -9,14 +9,24 @@ export const crud = {
         type: actionTypes.RESET_STATE,
       });
     },
-  // currentAction:
-  // ({actionType, data}) => {
-  //   async (dispatch) => {
-  //     dispatch({
-  //       type: actionType.
-  //     })
-  //   }
-  // }
+  resetAction:
+    ({ actionType }) =>
+    async (dispatch) => {
+      dispatch({
+        type: actionTypes.RESET_ACTION,
+        keyState: actionType,
+        payload: null,
+      });
+    },
+  currentAction:
+    ({ actionType, data }) =>
+    async (dispatch) => {
+      dispatch({
+        type: actionTypes.CURRENT_ACTION,
+        keyState: actionType,
+        payload: { ...data },
+      });
+    },
   list:
     ({ entity, options = { page: 1, items: 10 } }) =>
     async (dispatch) => {

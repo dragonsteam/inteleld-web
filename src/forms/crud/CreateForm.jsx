@@ -4,33 +4,36 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import { crud } from '@/redux/crud/actions';
 import { selectCreatedItem, selectErrorFields } from '@/redux/crud/selector';
-import { CrudContext } from '@/context/crud';
+import { useCrudContext } from '@/context/crud';
 import Loading from '@/components/Loading';
 import ErrorList from '@/forms/ErrorList';
 
 export default function CreateForm({ config, formElements }) {
-  const { fields, entity } = config;
-
+  const { entity } = config;
   const dispatch = useDispatch();
-  const { panel } = useContext(CrudContext);
+  const { isLoading, isSuccess } = useSelector(selectCreatedItem);
+  const { crudContextAction } = useCrudContext();
+  const { panel } = crudContextAction;
+  const [form] = Form.useForm();
 
   const onSubmit = (fieldsValue) => {
     dispatch(crud.create({ entity, data: fieldsValue }));
   };
 
-  const { isLoading, isSuccess } = useSelector(selectCreatedItem);
   const resErrors = useSelector(selectErrorFields);
 
   useEffect(() => {
     if (isSuccess) {
       panel.close();
+      form.resetFields();
+      dispatch(crud.resetAction({ actionType: 'create' }));
       dispatch(crud.list({ entity }));
     }
   }, [isSuccess]);
 
   return (
     <Loading isLoading={isLoading}>
-      <Form layout="vertical" onFinish={onSubmit}>
+      <Form form={form} layout="vertical" onFinish={onSubmit}>
         {formElements}
         <Form.Item>
           <Button type="primary" htmlType="submit">

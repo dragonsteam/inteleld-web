@@ -1,7 +1,7 @@
 import { useLayoutEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
-import CreateForm from '@/forms/CreateForm/CreateForm';
+import CreateForm from '@/forms/crud/CreateForm';
 import DataTable from '@/components/DataTable/DataTable';
 import DeleteModal from '@/components/DeleteModal/DeleteModal';
 import { crud } from '@/redux/crud/actions';

@@ -1,10 +1,11 @@
-import { useContext } from 'react';
 import { Drawer } from 'antd';
 
-import { CrudContext } from '@/context/crud';
+import { useCrudContext } from '@/context/crud';
 
 export default function SidePanel({ config, topContent, bottomContent }) {
-  const { panel } = useContext(CrudContext);
+  const { state, crudContextAction } = useCrudContext();
+  const { isPanelClose } = state;
+  const { panel } = crudContextAction;
 
   const { PANEL_TITLE } = config;
 
@@ -15,7 +16,7 @@ export default function SidePanel({ config, topContent, bottomContent }) {
       onClose={() => {
         panel.close();
       }}
-      open={panel.isOpen}
+      open={!isPanelClose}
       width={450}
     >
       {topContent}
