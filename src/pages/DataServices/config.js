@@ -1,4 +1,4 @@
-export const DATA_SERVICE_NAMES = [{ value: 'sa', label: 'Samsara' }];
+export const DATA_SERVICE_NAMES = [{ value: 'sa', label: 'Samsara', color: 'blue' }];
 
 export const fields = {
   name: {
@@ -11,6 +11,7 @@ export const fields = {
     label: 'Service Name',
     options: DATA_SERVICE_NAMES,
     required: true,
+    renderAsTag: true,
   },
   key: {
     type: 'string',

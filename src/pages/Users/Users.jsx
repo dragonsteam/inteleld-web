@@ -16,7 +16,7 @@ export default function Users() {
     <CrudModule
       config={config}
       createForm={<DynamicForm fields={fields} />}
-      // updateForm={<DynamicForm fields={fields} />}
+      updateForm={<DynamicForm fields={fields} />}
     />
   );
 }

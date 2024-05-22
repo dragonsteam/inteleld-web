@@ -12,5 +12,11 @@ export default function Trailers() {
     fields,
   };
 
-  return <CrudModule config={config} createForm={<DynamicForm fields={fields} />} />;
+  return (
+    <CrudModule
+      config={config}
+      createForm={<DynamicForm fields={fields} />}
+      updateForm={<DynamicForm fields={fields} />}
+    />
+  );
 }
