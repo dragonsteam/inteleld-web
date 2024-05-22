@@ -31,6 +31,17 @@ const request = {
       return handleError(error);
     }
   },
+  update: async ({ entity, id, jsonData }) => {
+    try {
+      const response = await axios.patch(`${entity}/${id}/`, jsonData, {
+        headers: { ...getAuthHeaders() },
+      });
+
+      return handleSuccess(response);
+    } catch (error) {
+      return handleError(error);
+    }
+  },
   delete: async ({ entity, id }) => {
     try {
       const response = await axios.delete(entity + '/' + id, {

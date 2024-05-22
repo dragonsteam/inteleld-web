@@ -12,8 +12,9 @@ export default function CreateForm({ config, formElements }) {
   const { entity } = config;
   const dispatch = useDispatch();
   const { isLoading, isSuccess } = useSelector(selectCreatedItem);
-  const { crudContextAction } = useCrudContext();
+  const { state, crudContextAction } = useCrudContext();
   const { panel } = crudContextAction;
+  const { isEditBoxOpen } = state;
   const [form] = Form.useForm();
 
   const onSubmit = (fieldsValue) => {
@@ -31,6 +32,7 @@ export default function CreateForm({ config, formElements }) {
     }
   }, [isSuccess]);
 
+  if (isEditBoxOpen) return <></>;
   return (
     <Loading isLoading={isLoading}>
       <Form form={form} layout="vertical" onFinish={onSubmit}>

@@ -15,7 +15,7 @@ export default function Customers() {
   return (
     <CrudModule
       createForm={<DynamicForm fields={fields} />}
-      // updateForm={<DynamicForm fields={fields} />}
+      updateForm={<DynamicForm fields={fields} />}
       config={config}
     />
   );

@@ -21,6 +21,14 @@ const contextActions = (dispatch) => {
         dispatch({ type: actionTypes.TOGGLE_PANEL });
       },
     },
+    editBox: {
+      open: () => {
+        dispatch({ type: actionTypes.OPEN_EDIT_BOX });
+      },
+      close: () => {
+        dispatch({ type: actionTypes.CLOSE_EDIT_BOX });
+      },
+    },
   };
 };
 

@@ -9,7 +9,7 @@ const INITIAL_KEY_STATE = {
 
 const INITIAL_STATE = {
   current: {
-    data: null,
+    result: null,
     errorFields: null,
   },
   list: {
@@ -25,6 +25,7 @@ const INITIAL_STATE = {
     isSuccess: false,
   },
   create: INITIAL_KEY_STATE,
+  update: INITIAL_KEY_STATE,
   delete: INITIAL_KEY_STATE,
   syncData: INITIAL_KEY_STATE,
 };
@@ -34,6 +35,13 @@ const crudReducer = (state = INITIAL_STATE, action) => {
   switch (action.type) {
     case actionTypes.RESET_STATE:
       return INITIAL_STATE;
+    case actionTypes.CURRENT_ITEM:
+      return {
+        ...state,
+        current: {
+          result: payload,
+        },
+      };
     case actionTypes.REQUEST_LOADING:
       return {
         ...state,

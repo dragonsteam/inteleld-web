@@ -3,6 +3,7 @@ import * as actionTypes from './types';
 export const initialState = {
   isModalOpen: false,
   isPanelClose: true,
+  isEditBoxOpen: false,
 };
 
 export function contextReducer(state, action) {
@@ -32,6 +33,17 @@ export function contextReducer(state, action) {
       return {
         ...state,
         isPanelClose: !state.isPanelClose,
+      };
+    case actionTypes.OPEN_EDIT_BOX:
+      return {
+        ...state,
+        // isReadBoxOpen: false,
+        isEditBoxOpen: true,
+      };
+    case actionTypes.CLOSE_EDIT_BOX:
+      return {
+        ...state,
+        isEditBoxOpen: false,
       };
 
     default: {

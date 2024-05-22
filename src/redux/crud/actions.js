@@ -18,6 +18,14 @@ export const crud = {
         payload: null,
       });
     },
+  currentItem:
+    ({ data }) =>
+    async (dispatch) => {
+      dispatch({
+        type: actionTypes.CURRENT_ITEM,
+        payload: { ...data },
+      });
+    },
   currentAction:
     ({ actionType, data }) =>
     async (dispatch) => {
@@ -60,7 +68,6 @@ export const crud = {
         });
       }
     },
-
   create:
     ({ entity, data }) =>
     async (dispatch) => {
@@ -89,7 +96,37 @@ export const crud = {
         });
       }
     },
+  update:
+    ({ entity, id, jsonData }) =>
+    async (dispatch) => {
+      dispatch({
+        type: actionTypes.REQUEST_LOADING,
+        keyState: 'update',
+        payload: null,
+      });
 
+      let data = null;
+
+      data = await request.update({ entity, id, jsonData });
+
+      if (data.success) {
+        dispatch({
+          type: actionTypes.REQUEST_SUCCESS,
+          keyState: 'update',
+          payload: data.result,
+        });
+        dispatch({
+          type: actionTypes.CURRENT_ITEM,
+          payload: data.result,
+        });
+      } else {
+        dispatch({
+          type: actionTypes.REQUEST_FAILED,
+          keyState: 'update',
+          payload: null,
+        });
+      }
+    },
   delete:
     ({ entity, id }) =>
     async (dispatch) => {
@@ -120,7 +157,6 @@ export const crud = {
         });
       }
     },
-
   syncData:
     ({ entity, id }) =>
     async (dispatch) => {

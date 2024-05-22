@@ -1,4 +1,4 @@
-import { DATA_SERVICE_NAMES } from '@/config/constants';
+export const DATA_SERVICE_NAMES = [{ value: 'sa', label: 'Samsara' }];
 
 export const fields = {
   name: {

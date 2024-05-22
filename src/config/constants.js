@@ -1,5 +1,3 @@
-export const DATA_SERVICE_NAMES = [{ value: 'sa', name: 'Samsara' }];
-
 export const STATES = [
   { value: 1, label: 'Alaska' },
   { value: 2, label: 'Alabama' },

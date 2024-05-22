@@ -45,7 +45,7 @@ export default function DataTable({ config }) {
     extra_dropdown_handlers: extra_handlers = {},
   } = config;
   const { crudContextAction } = useCrudContext();
-  const { modal, panel } = crudContextAction;
+  const { modal, panel, editBox } = crudContextAction;
 
   const items = [
     {
@@ -72,7 +72,12 @@ export default function DataTable({ config }) {
 
   // actions in dropdown //
   const handleView = (record) => {};
-  const handleEdit = (record) => {};
+  const handleEdit = (record) => {
+    dispatch(crud.currentItem({ data: record }));
+    dispatch(crud.currentAction({ actionType: 'update', data: record }));
+    panel.open();
+    editBox.open();
+  };
   const handleDelete = (record) => {
     dispatch(crud.currentAction({ actionType: 'delete', data: record }));
     modal.open();
