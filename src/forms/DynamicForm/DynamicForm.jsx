@@ -19,9 +19,9 @@ export default function DynamicForm({ fields }) {
 function FormElement({ field }) {
   // const { dateFormat } = useDate();
 
-  const defaultFilterOption = (input, option) => {
-    return (option?.children ?? '').toLowerCase().includes(input.toLowerCase());
-  };
+  const defaultFilterOption = (input, option) =>
+    (option?.children ?? '').toLowerCase().includes(input.toLowerCase());
+
   const SelectComponent = () => (
     <Form.Item
       label={field.label}
@@ -36,7 +36,6 @@ function FormElement({ field }) {
       <Select
         showSearch
         defaultValue={field.defaultValue}
-        optionFilterProp="children"
         filterOption={defaultFilterOption}
         style={{
           width: '100%',
