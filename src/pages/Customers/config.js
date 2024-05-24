@@ -1,15 +1,15 @@
 import { STATES } from '@/config/constants';
 
 const CUSTOMER_TYPES = [
-  { value: 1, label: 'Broker', color: 'magenta' },
+  { value: 1, label: 'Broker', color: 'blue' },
   { value: 2, label: 'Carrier', color: 'green' },
-  { value: 3, label: 'Shipper', color: 'blue' },
+  { value: 3, label: 'Shipper', color: 'magenta' },
 ];
 
 export const fields = {
   name: {
     type: 'string',
-    label: 'Name',
+    label: 'Company Name',
     required: true,
   },
   customer_id: {
@@ -21,11 +21,20 @@ export const fields = {
     label: 'Customer type',
     options: CUSTOMER_TYPES,
     renderAsTag: true,
+    defaultValue: 1, // Broker
   },
-  website: {
-    type: 'url',
-    label: 'Website',
+  contact_number: {
+    type: 'string',
+    label: 'Contact Number',
   },
+  contact_email: {
+    type: 'email',
+    label: 'Contact Email',
+  },
+  // website: {
+  //   type: 'url',
+  //   label: 'Website',
+  // },
   address: {
     type: 'string',
     label: 'Address',
@@ -42,7 +51,7 @@ export const fields = {
   },
   postal_code: {
     type: 'string',
-    label: 'Postal Code',
+    label: 'ZIP Code',
   },
   is_fmcsa_verified: {
     type: 'boolean',
