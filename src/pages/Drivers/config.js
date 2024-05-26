@@ -1,3 +1,16 @@
+import { STATES } from "@/config/constants";
+
+const DRIVER_STATUSES = [
+  { value: 1, label: 'Available'},
+  { value: 2, label: 'Assigned'},
+  { value: 3, label: 'Dispatched'},
+  { value: 4, label: 'In-Transit'},
+  { value: 5, label: 'Shop'},
+  { value: 6, label: 'Rest'},
+  { value: 7, label: 'Home'},
+  { value: 8, label: 'Inactive'},
+];
+
 export const fields = {
   first_name: {
     type: 'string',
@@ -9,112 +22,65 @@ export const fields = {
     label: 'Last Name',
     required: true,
   },
-  email: {
-    type: 'email',
-    label: 'Email',
-    required: true,
+  status: {
+    type: 'select',
+    label: 'Status',
+    options: DRIVER_STATUSES,
+    read_only: true, 
+  },
+  contact_number: {
+    type: 'string',
+    label: 'Contact Number',
+  },
+  contact_email: {
+    type: 'string',
+    label: 'Contact Email',
+  },
+  truck: {
+    type: 'number',
+    label: 'Truck',
+  },
+  trailer: {
+    type: 'number',
+    label: 'Trailer',
+  },
+  dispatcher: {
+    type: 'number',
+    label: 'Dispatcher',
+  },
+  co_driver: {
+    type: 'number',
+    label: 'Co Driver',
   },
   cdl_number: {
     type: 'string',
     label: 'CDL Number',
-    required: true,
   },
-  password: {
-    type: 'password',
-    label: 'Password',
-    required: true,
-    write_only: true,
+  cdl_state: {
+    type: 'select',
+    label: 'CDL State',
+    options: STATES,
+    hide_on_table: true,
   },
-  co_driver: {
+  bith_date: {
+    type: 'date',
+    label: 'Birth Date',
+  },
+  address: {
     type: 'string',
-    label: 'Co Driver',
+    label: 'Address',
   },
-  truck: {
+  city: {
     type: 'string',
-    label: 'Truck',
+    label: 'City',
   },
-  // company: {
-  //   type: 'search',
-  //   entity: 'company',
-  //   renderAsTag: true,
-  //   redirectLabel: 'Add New Company',
-  //   withRedirect: true,
-  //   urlToRedirect: '/company',
-  //   displayLabels: ['name'],
-  //   searchFields: 'name',
-  //   dataIndex: ['company', 'name'],
-  // },
-  phone: {
-    type: 'string',
-    label: 'Phone',
+  state: {
+    type: 'select',
+    label: 'State',
+    options: STATES,
   },
-  app_version: {
-    type: 'string',
-    label: 'App Version',
-    read_only: true,
+  notes: {
+    type: 'textarea',
+    label: 'City',
   },
-  // bio: {
-  //   type: 'string',
-  // },
-  // idCardNumber: {
-  //   type: 'string',
-  // },
-  // idCardType: {
-  //   type: 'string',
-  // },
-  // securitySocialNbr: {
-  //   type: 'string',
-  // },
-  // taxNumber: {
-  //   type: 'string',
-  // },
-  // birthday: {
-  //   type: 'date',
-  // },
-  // birthplace: {
-  //   type: 'string',
-  // },
-  // gender: {
-  //   type: 'select',
-  //   options: [
-  //     {
-  //       value: 'male',
-  //       label: 'Male',
-  //     },
-  //     {
-  //       value: 'female',
-  //       label: 'Female',
-  //     },
-  //   ],
-  // },
-  // bankName: {
-  //   type: 'string',
-  // },
-  // bankIban: {
-  //   type: 'string',
-  // },
-  // bankSwift: {
-  //   type: 'string',
-  // },
-  // bankNumber: {
-  //   type: 'string',
-  // },
-  // bankRouting: {
-  //   type: 'string',
-  // },
-  // address: {
-  //   type: 'string',
-  // },
-  // city: {
-  //   type: 'string',
-  // },
-  // State: {
-  //   type: 'string',
-  // },
-  // postalCode: {
-  //   type: 'number',
-  // },
-  // website: {
-  //   type: 'string',
-  // },
 };
