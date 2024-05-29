@@ -3,6 +3,7 @@ import { Navigate } from 'react-router-dom';
 import Logout from '@/pages/Logout';
 import Dashboard from '@/pages/Dashboard';
 import Map from '@/pages/Map/Map';
+import DispatchBoard from '@/pages/DispatchBoard/DispatchBoard';
 import Customers from '@/pages/Customers/Customers';
 import Users from '@/pages/Users/Users';
 import Drivers from '@/pages/Drivers/Drivers';
@@ -32,6 +33,7 @@ let routes = {
     //
     { path: '/', element: <Dashboard /> },
     { path: '/map', element: <Map /> },
+    { path: '/board', element: <DispatchBoard /> },
     { path: '/customers', element: <Customers /> },
     { path: '/users', element: <Users /> },
     { path: '/drivers', element: <Drivers /> },
