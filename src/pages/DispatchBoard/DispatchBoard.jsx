@@ -3,7 +3,7 @@ import { Layout, Table } from 'antd';
 const columns = [
   {
     title: 'Driver',
-    width: 250,
+    width: 100,
     dataIndex: 'name',
     key: 'name',
     fixed: 'left',
@@ -21,6 +21,26 @@ const columns = [
     width: 150,
     dataIndex: 'address',
     key: '1',
+    render: (record) => (
+      <>
+        {record}
+        <div
+          style={{
+            position: 'absolute',
+            background: 'lime',
+            margin: '5px',
+            padding: '10px',
+            borderRadius: '5px',
+            width: '200px',
+            left: 0,
+            top: 0,
+            zIndex: 1,
+          }}
+        >
+          tag
+        </div>
+      </>
+    ),
   },
   {
     title: 'Monday',
