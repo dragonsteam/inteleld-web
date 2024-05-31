@@ -29,12 +29,14 @@ const columns = [
             position: 'absolute',
             background: 'lime',
             margin: '5px',
-            padding: '10px',
+            padding: '5px',
             borderRadius: '5px',
             width: '200px',
-            left: 0,
-            top: 0,
+            left: 120,
+            top: 4,
             zIndex: 1,
+            boxShadow: '2px 2px 0px grey',
+            cursor: 'pointer',
           }}
         >
           tag
@@ -119,6 +121,7 @@ export default function DispatchBoard() {
         scroll={{
           x: 1300,
         }}
+        bordered
       />
     </Layout.Content>
   );
