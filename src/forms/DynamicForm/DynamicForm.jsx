@@ -1,5 +1,5 @@
-import { Form, Input, InputNumber, Switch, Select, DatePicker } from 'antd';
-import { CloseOutlined, CheckOutlined } from '@ant-design/icons';
+import { Form, Input, InputNumber, Switch, Select, DatePicker, Upload } from 'antd';
+import { CloseOutlined, CheckOutlined, InboxOutlined } from '@ant-design/icons';
 
 export default function DynamicForm({ fields }) {
   return (
@@ -72,6 +72,19 @@ function FormElement({ field }) {
         defaultValue={field.defaultValue || false}
       />
     ),
+    file: (
+      <Upload.Dragger beforeUpload={() => false} multiple={false}>
+        <p className="ant-upload-drag-icon">
+          <InboxOutlined />
+        </p>
+        <p className="ant-upload-text">Click or drag file to this area to upload</p>
+        <p className="ant-upload-hint">
+          Support for a single or bulk upload. Strictly prohibited from uploading company data or
+          other banned files.
+        </p>
+      </Upload.Dragger>
+    ),
+
     // date: (
     //   <DatePicker
     //     placeholder={translate('select_date')}

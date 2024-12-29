@@ -18,6 +18,13 @@ export default function CreateForm({ config, formElements }) {
   const [form] = Form.useForm();
 
   const onSubmit = (fieldsValue) => {
+    console.log('values: ', fieldsValue);
+
+    Object.keys(fieldsValue).map((key) => {
+      if (fieldsValue[key]?.file) {
+        fieldsValue[key] = fieldsValue[key].file.originFileObj;
+      }
+    });
     dispatch(crud.create({ entity, data: fieldsValue }));
   };
 

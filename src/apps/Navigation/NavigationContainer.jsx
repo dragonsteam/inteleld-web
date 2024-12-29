@@ -109,6 +109,11 @@ function Sidebar({ collapsible, isMobile = false }) {
       label: <Link to={'/invoice'}>Invoices</Link>,
     },
     {
+      key: 'toll-reports',
+      icon: <ContainerOutlined />,
+      label: <Link to={'/toll-reports'}>Toll Reports</Link>,
+    },
+    {
       key: 'data-services',
       icon: <FileSyncOutlined />,
       label: <Link to={'/data-services'}>Data Services</Link>,
