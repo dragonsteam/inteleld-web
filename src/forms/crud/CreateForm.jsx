@@ -22,6 +22,8 @@ export default function CreateForm({ config, formElements }) {
 
     Object.keys(fieldsValue).map((key) => {
       if (fieldsValue[key]?.file) {
+        console.log('fukckkk', fieldsValue[key].file);
+        console.log('fukckkk2', fieldsValue[key].file.originFileObj);
         fieldsValue[key] = fieldsValue[key].file.originFileObj;
       }
     });

@@ -77,6 +77,8 @@ export const crud = {
         payload: null,
       });
 
+      console.log('shit', data);
+
       let resData = await request.create({ entity, data });
 
       if (resData.success) {
