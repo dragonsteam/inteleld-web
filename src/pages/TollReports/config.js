@@ -8,4 +8,9 @@ export const fields = {
     type: 'textarea',
     label: 'Notes',
   },
+  created_at: {
+    type: 'datetime',
+    label: 'Created At',
+    read_only: true,
+  },
 };

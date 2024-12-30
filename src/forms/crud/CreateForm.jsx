@@ -8,6 +8,17 @@ import { useCrudContext } from '@/context/crud';
 import Loading from '@/components/Loading';
 import ErrorList from '@/forms/ErrorList';
 
+async function getFileBase64(file) {
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+
+    reader.onload = () => resolve(reader.result.split(',')[1]); // Extract Base64 part
+    reader.onerror = (error) => reject(error);
+
+    reader.readAsDataURL(file);
+  });
+}
+
 export default function CreateForm({ config, formElements }) {
   const { entity } = config;
   const dispatch = useDispatch();
@@ -17,17 +28,20 @@ export default function CreateForm({ config, formElements }) {
   const { isEditBoxOpen } = state;
   const [form] = Form.useForm();
 
-  const onSubmit = (fieldsValue) => {
-    console.log('values: ', fieldsValue);
+  let withUpload = false;
 
+  const onSubmit = (fieldsValue) => {
+    // watch for files attached
     Object.keys(fieldsValue).map((key) => {
       if (fieldsValue[key]?.file) {
-        console.log('fukckkk', fieldsValue[key].file);
-        console.log('fukckkk2', fieldsValue[key].file.originFileObj);
-        fieldsValue[key] = fieldsValue[key].file.originFileObj;
+        withUpload = true;
+
+        const originFileObj = fieldsValue[key].fileList[0].originFileObj;
+        fieldsValue[key] = originFileObj;
       }
     });
-    dispatch(crud.create({ entity, data: fieldsValue }));
+
+    dispatch(crud.create({ entity, data: fieldsValue, withUpload }));
   };
 
   const resErrors = useSelector(selectErrorFields);

@@ -20,10 +20,14 @@ const request = {
       return handleError(error);
     }
   },
-  create: async ({ entity, data }) => {
+  create: async ({ entity, data, withUpload = false }) => {
+    console.log('fucker', withUpload);
     try {
       const response = await axios.post(entity + '/', data, {
-        headers: { ...getAuthHeaders() },
+        headers: {
+          'Content-Type': withUpload ? 'multipart/form-data' : 'application/json',
+          ...getAuthHeaders(),
+        },
       });
 
       return handleSuccess(response);

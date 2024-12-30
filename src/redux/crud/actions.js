@@ -69,7 +69,7 @@ export const crud = {
       }
     },
   create:
-    ({ entity, data }) =>
+    ({ entity, data, withUpload = false }) =>
     async (dispatch) => {
       dispatch({
         type: actionTypes.REQUEST_LOADING,
@@ -79,7 +79,7 @@ export const crud = {
 
       console.log('shit', data);
 
-      let resData = await request.create({ entity, data });
+      let resData = await request.create({ entity, data, withUpload });
 
       if (resData.success) {
         dispatch({
