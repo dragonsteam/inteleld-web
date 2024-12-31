@@ -1,5 +1,8 @@
 import { Switch, Tag } from 'antd';
+import { Link } from 'react-router-dom';
 import { CloseOutlined, CheckOutlined } from '@ant-design/icons';
+
+import { formatUrl } from './helpers';
 
 export function dataForTable({ fields }) {
   let columns = [];
@@ -40,6 +43,11 @@ export function dataForTable({ fields }) {
               </Tag>
             );
           } else return record[key] && selectedOption.label;
+        },
+      },
+      link: {
+        render: (_, record) => {
+          return <Link to={formatUrl(field.url, record)}>{field.label || field.url}</Link>;
         },
       },
     };

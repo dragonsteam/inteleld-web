@@ -10,6 +10,13 @@ export const fields = {
     label: 'Report File',
     required: true,
   },
+  records: {
+    type: 'link',
+    label: 'Records',
+    url: '/toll-reports/<id>/records',
+    is_external_url: false,
+    read_only: true,
+  },
   notes: {
     type: 'textarea',
     label: 'Notes',
