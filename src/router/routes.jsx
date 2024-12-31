@@ -10,6 +10,7 @@ import Drivers from '@/pages/Drivers/Drivers';
 import Trucks from '@/pages/Trucks/Trucks';
 import Trailers from '@/pages/Trailers/Trailers';
 import TollReports from '@/pages/TollReports/TollReports';
+import TollRecords from '@/pages/TollRecords/TollRecords';
 import DataServices from '@/pages/DataServices/DataServices';
 import NotFoundPage from '@/pages/NotFound';
 
@@ -41,6 +42,7 @@ let routes = {
     { path: '/trucks', element: <Trucks /> },
     { path: '/trailers', element: <Trailers /> },
     { path: '/toll-reports', element: <TollReports /> },
+    { path: '/toll-reports/:id/records', element: <TollRecords /> },
     { path: '/data-services', element: <DataServices /> },
 
     { path: '*', element: <NotFoundPage /> },
