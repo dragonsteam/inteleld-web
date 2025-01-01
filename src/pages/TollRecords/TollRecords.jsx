@@ -1,12 +1,35 @@
 import { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { Layout, Table, Flex } from 'antd';
+import { Layout, Table, Flex, Popover } from 'antd';
+import { InfoCircleOutlined } from '@ant-design/icons';
 
 import { toll } from '@/redux/toll/actions';
 import { selectRecordsList } from '@/redux/toll/selector';
 
+const getErrorsMsg = (errors) => {
+  const errorsMap = {
+    I: 'Record is invalid',
+    T: 'Truck with the plate is not found',
+  };
+
+  const errorArray = errors.split('');
+
+  return errorArray.map((error, index) => (
+    <p key={index} style={{ color: '#f5222d' }}>
+      {errorsMap[error] || `Unknown Error: ${error}`}
+    </p>
+  ));
+};
+
 const columns = [
+  {
+    title: '#',
+    dataIndex: 'index',
+    key: 'index',
+    width: 50,
+    render: (_, __, index) => index + 1, // Display row number
+  },
   { title: 'License Plate', dataIndex: 'licence_plate' },
   { title: 'License State', dataIndex: 'licence_state' },
   { title: 'Unit', dataIndex: 'unit' },
@@ -28,6 +51,20 @@ const columns = [
   { title: 'Exit Samsara Address Name', dataIndex: 'exit_address_samsara' },
   { title: 'Exit Samsara Lat', dataIndex: 'exit_location_samsara_lat' },
   { title: 'Exit Samsara Lng', dataIndex: 'exit_location_samsara_lng' },
+  {
+    title: 'Errors',
+    dataIndex: 'errors',
+    width: 60,
+    fixed: 'right',
+    render: (value, __) => {
+      if (!value) return <></>;
+      return (
+        <Popover placement="leftTop" title="errors" content={getErrorsMsg(value)}>
+          <InfoCircleOutlined style={{ color: '#f5222d' }} />
+        </Popover>
+      );
+    },
+  },
 ];
 
 export default function TollRecords() {
@@ -42,7 +79,7 @@ export default function TollRecords() {
 
   return (
     <Layout.Content
-      className="whiteBox shadow"
+      className="toll whiteBox shadow"
       style={{
         margin: '30px auto',
       }}
@@ -50,8 +87,8 @@ export default function TollRecords() {
       <Table
         columns={columns}
         dataSource={recordsList}
-        pagination={false}
-        scroll={{ x: 'max-content' }}
+        // pagination={false}
+        scroll={{ x: 'max-content', y: '80vh' }}
       />
     </Layout.Content>
   );

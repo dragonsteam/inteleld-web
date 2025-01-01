@@ -1,7 +1,8 @@
 export const REPORT_STATUSES = [
   { value: 1, label: 'Waiting for process', color: 'magenta' },
   { value: 2, label: 'Report is being processed', color: 'purple' },
-  { value: 3, label: 'Processed', color: 'green' },
+  { value: 3, label: 'All Good', color: 'green' },
+  { value: 4, label: 'Has Errors', color: 'yellow' },
 ];
 
 export const fields = {

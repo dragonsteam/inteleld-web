@@ -1,0 +1,12 @@
+.toll {
+  th {
+    white-space: nowrap; /* Force text in header cells to stay on one line */
+    overflow: hidden;
+  }
+
+  table {
+    td {
+      padding: 0 16px !important;
+    }
+  }
+}
