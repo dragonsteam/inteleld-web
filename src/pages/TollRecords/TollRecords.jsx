@@ -87,7 +87,11 @@ export default function TollRecords() {
       <Table
         columns={columns}
         dataSource={recordsList}
-        // pagination={false}
+        pagination={{
+          pageSize: 100, // Default page size
+          showSizeChanger: true, // Allow users to change page size
+          pageSizeOptions: ['50', '100', '200', '500', '1000'], // Page size options
+        }}
         scroll={{ x: 'max-content', y: '80vh' }}
       />
     </Layout.Content>
